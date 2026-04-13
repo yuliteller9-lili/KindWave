@@ -8,33 +8,35 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#FEF7FD;--surface:#FFF9FE;--card:#FFFFFF;
-  --primary:#C88ABE;--primary-light:#FAF0F8;--primary-dark:#9E66A0;
-  --accent:#A890D0;--accent-light:#F3EFFC;
-  --pink:#DFA8C8;--pink-light:#FEF2F8;
+  --bg:#FFF8FA;--surface:#FFFBFD;--card:#FFFFFF;
+  --primary:#CC88BB;--primary-light:#FAF0F7;--primary-dark:#A06090;
+  --accent:#B090D0;--accent-light:#F3EFFC;
+  --pink:#E0A8C8;--pink-light:#FEF4F9;
   --green:#6DB87A;--green-light:#EBF7EF;
   --text:#3A2040;--text-muted:#907898;--text-light:#C8B0C8;
   --border:#F2DDEF;--border-strong:#DEB8DC;
   --danger:#C87888;--danger-light:#FEF2F4;
   --warn:#C8985A;--warn-light:#FDF4E5;
 }
-body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
-body::before{content:'';position:fixed;inset:0;background:
-  radial-gradient(ellipse at 12% 18%,rgba(210,155,200,0.20) 0%,transparent 44%),
-  radial-gradient(ellipse at 88% 80%,rgba(160,128,210,0.18) 0%,transparent 44%),
-  radial-gradient(ellipse at 52% 6%,rgba(230,175,215,0.14) 0%,transparent 38%),
-  radial-gradient(ellipse at 72% 48%,rgba(185,150,225,0.11) 0%,transparent 33%),
-  radial-gradient(ellipse at 16% 85%,rgba(218,150,200,0.13) 0%,transparent 36%),
-  radial-gradient(ellipse at 38% 55%,rgba(200,165,225,0.09) 0%,transparent 30%);
-  pointer-events:none;z-index:0}
-body::after{content:'';position:fixed;inset:0;
-  background-image:
-    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='1.5' fill='%23c88abe' fill-opacity='0.09'/%3E%3Ccircle cx='40' cy='8' r='1' fill='%23a890d0' fill-opacity='0.07'/%3E%3Ccircle cx='72' cy='8' r='1.5' fill='%23c88abe' fill-opacity='0.09'/%3E%3Ccircle cx='8' cy='40' r='1' fill='%23a890d0' fill-opacity='0.07'/%3E%3Ccircle cx='40' cy='40' r='2' fill='%23c88abe' fill-opacity='0.06'/%3E%3Ccircle cx='72' cy='40' r='1' fill='%23a890d0' fill-opacity='0.07'/%3E%3Ccircle cx='8' cy='72' r='1.5' fill='%23c88abe' fill-opacity='0.09'/%3E%3Ccircle cx='40' cy='72' r='1' fill='%23a890d0' fill-opacity='0.07'/%3E%3Ccircle cx='72' cy='72' r='1.5' fill='%23c88abe' fill-opacity='0.09'/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='100' cy='100' rx='18' ry='8' fill='none' stroke='%23c88abe' stroke-opacity='0.04' stroke-width='1'/%3E%3Cellipse cx='30' cy='30' rx='10' ry='5' fill='none' stroke='%23a890d0' stroke-opacity='0.04' stroke-width='1'/%3E%3Cellipse cx='170' cy='170' rx='12' ry='6' fill='none' stroke='%23c88abe' stroke-opacity='0.04' stroke-width='1'/%3E%3Cellipse cx='170' cy='30' rx='8' ry='4' fill='none' stroke='%23a890d0' stroke-opacity='0.03' stroke-width='1'/%3E%3Cellipse cx='30' cy='170' rx='8' ry='4' fill='none' stroke='%23c88abe' stroke-opacity='0.03' stroke-width='1'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:0}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;overflow-x:hidden}
+
+/* ── Cute background canvas ── */
+.bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.blob{position:absolute;border-radius:60% 40% 55% 45% / 50% 60% 40% 55%;filter:blur(45px);opacity:1}
+.blob1{width:420px;height:340px;background:rgba(238,170,195,0.72);top:-60px;left:-80px}
+.blob2{width:380px;height:300px;background:rgba(242,178,200,0.68);bottom:-50px;right:-60px}
+.blob3{width:220px;height:180px;background:rgba(228,165,195,0.55);bottom:100px;right:10px}
+.blob4{position:absolute;border-radius:45% 55% 40% 60% / 55% 45% 60% 40%;filter:blur(50px);opacity:1;width:300px;height:240px;background:rgba(210,175,225,0.55);top:40%;left:50%;transform:translateX(-50%)}
+.deco-heart{position:absolute;pointer-events:none}
+.deco-heart svg{opacity:0.75}
+.deco-star{position:absolute;pointer-events:none;opacity:0.7}
+.deco-bow{position:absolute;pointer-events:none;opacity:0.65}
+.deco-butterfly{position:absolute;pointer-events:none;opacity:0.7}
+.deco-dotline{position:absolute;pointer-events:none;opacity:0.35}
+
 h1,h2,h3{font-family:'Playfair Display',serif}
-.app{display:flex;height:100vh;overflow:hidden;position:relative;z-index:1}
-.sidebar{width:230px;background:linear-gradient(180deg,#FFF5FE 0%,#F8F0FF 100%);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+.app{display:flex;height:100vh;overflow:hidden;position:relative;z-index:2}
+.sidebar{width:230px;background:linear-gradient(180deg,rgba(255,248,253,0.88) 0%,rgba(252,240,255,0.88) 100%);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;backdrop-filter:blur(12px)}
 .sidebar-logo{padding:24px 20px 18px;border-bottom:1px solid var(--border)}
 .sidebar-logo h1{font-size:22px;color:var(--primary);letter-spacing:-0.5px}
 .sidebar-logo p{font-size:11px;color:var(--text-muted);margin-top:2px}
@@ -45,43 +47,35 @@ h1,h2,h3{font-family:'Playfair Display',serif}
 .nav-item.active{color:var(--primary-dark);background:var(--primary-light);border-left-color:var(--primary)}
 .nav-item .icon{width:18px;text-align:center;font-size:15px}
 .nav-badge{margin-left:auto;background:var(--danger);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px}
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.topbar{background:rgba(255,245,254,0.92);border-bottom:1px solid var(--border);padding:0 28px;height:58px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;background:transparent}
+.topbar{background:rgba(255,251,253,0.88);border-bottom:1px solid var(--border);padding:0 28px;height:58px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;backdrop-filter:blur(12px)}
 .topbar-title{font-size:18px;font-weight:700;color:var(--text);font-family:'Playfair Display',serif}
 .topbar-right{display:flex;align-items:center;gap:12px}
-.content{flex:1;overflow-y:auto;padding:28px}
-.card{background:rgba(255,255,255,0.85);border:1px solid var(--border);border-radius:18px;padding:20px}
+.content{flex:1;overflow-y:auto;padding:28px;background:transparent}
+.card{background:rgba(255,255,255,0.88);border:1px solid var(--border);border-radius:18px;padding:20px;backdrop-filter:blur(4px)}
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .card-title{font-size:15px;font-weight:700;color:var(--text)}
 .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .15s;font-family:'Nunito',sans-serif}
-.btn-primary{background:linear-gradient(135deg,#C888BE,#DFA8C8);color:#fff;box-shadow:0 2px 10px rgba(200,138,190,0.25)}.btn-primary:hover{box-shadow:0 4px 16px rgba(200,138,190,0.35);transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(135deg,#CC88BB,#E0A8C8);color:#fff;box-shadow:0 2px 10px rgba(200,136,187,0.28)}.btn-primary:hover{box-shadow:0 4px 16px rgba(200,136,187,0.38);transform:translateY(-1px)}
 .btn-primary:disabled{opacity:.5;transform:none;cursor:not-allowed}
 .btn-ghost{background:transparent;color:var(--text-muted);border:1.5px solid var(--border)}.btn-ghost:hover{background:var(--primary-light);border-color:var(--border-strong)}
 .btn-success{background:linear-gradient(135deg,var(--green),#4aa860);color:#fff}.btn-success:hover{opacity:.9}
-.btn-danger{background:linear-gradient(135deg,var(--danger),#b04060);color:#fff}.btn-danger:hover{opacity:.9}
-.btn-accent{background:linear-gradient(135deg,var(--accent),#7a50b0);color:#fff}.btn-accent:hover{opacity:.9}
+.btn-danger{background:linear-gradient(135deg,var(--danger),#b05068);color:#fff}.btn-danger:hover{opacity:.9}
+.btn-accent{background:linear-gradient(135deg,var(--accent),#8870b8);color:#fff}.btn-accent:hover{opacity:.9}
 .btn-sm{padding:5px 14px;font-size:12px}
-input,textarea,select{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:13px;font-family:'Nunito',sans-serif;background:rgba(255,255,255,0.8);color:var(--text);outline:none;transition:border .15s,box-shadow .15s}
-input:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(201,107,181,0.12)}
+input,textarea,select{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:13px;font-family:'Nunito',sans-serif;background:rgba(255,255,255,0.85);color:var(--text);outline:none;transition:border .15s,box-shadow .15s}
+input:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(204,136,187,0.12)}
 textarea{resize:vertical;min-height:80px}
 label{font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.6px}
 .form-group{margin-bottom:14px}
-.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;z-index:1}
-.deco{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(40px)}
-.deco1{width:400px;height:400px;background:#e0b0d8;opacity:0.18;top:-120px;left:-120px}
-.deco2{width:350px;height:350px;background:#b8a0e0;opacity:0.16;bottom:-100px;right:-100px}
-.deco3{width:250px;height:250px;background:#d8a8d0;opacity:0.14;top:30%;right:6%}
-.deco4{width:200px;height:200px;background:#c8b0e0;opacity:0.12;bottom:12%;left:4%}
-.texture-overlay{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:1;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-  background-repeat:repeat;background-size:300px 300px}
-.auth-card{background:rgba(255,255,255,0.92);border:1px solid var(--border);border-radius:24px;padding:38px 34px;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(201,107,181,0.12)}
+.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;z-index:2}
+.auth-card{background:rgba(255,255,255,0.90);border:1px solid var(--border);border-radius:24px;padding:38px 34px;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(200,136,187,0.13);backdrop-filter:blur(12px)}
 .auth-logo{text-align:center;margin-bottom:28px}
 .auth-logo h1{font-size:34px;color:var(--primary)}
 .auth-logo p{color:var(--text-muted);font-size:14px;margin-top:4px}
 .auth-tabs{display:flex;margin-bottom:24px;background:var(--bg);border-radius:50px;padding:3px}
 .auth-tab{flex:1;padding:9px;text-align:center;cursor:pointer;font-size:13px;font-weight:700;color:var(--text-muted);border-radius:50px;transition:all .2s}
-.auth-tab.active{background:linear-gradient(135deg,#C888BE,#DFA8C8);color:#fff;box-shadow:0 2px 8px rgba(200,138,190,0.25)}
+.auth-tab.active{background:linear-gradient(135deg,#CC88BB,#E0A8C8);color:#fff;box-shadow:0 2px 8px rgba(200,136,187,0.28)}
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{text-align:left;padding:10px 14px;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--border)}
@@ -94,7 +88,7 @@ tr:hover td{background:var(--primary-light)}
 .badge-admin{background:var(--accent-light);color:#5a3090}
 .badge-denied{background:var(--danger-light);color:#8a2040}
 .badge-anon{background:var(--primary-light);color:var(--primary-dark)}
-.msg-card{background:rgba(255,255,255,0.85);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px}
+.msg-card{background:rgba(255,255,255,0.88);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px}
 .msg-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
 .msg-from{font-size:12px;font-weight:700;color:var(--text-muted)}
 .msg-body{font-size:14px;line-height:1.65;color:var(--text)}
@@ -103,11 +97,11 @@ tr:hover td{background:var(--primary-light)}
 .msg-type-message{background:var(--green-light);color:#2a7045}
 .msg-type-media{background:var(--pink-light);color:#8a3060}
 .msg-time{font-size:11px;color:var(--text-light);margin-left:auto}
-.quote-card{background:rgba(255,255,255,0.85);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:12px}
+.quote-card{background:rgba(255,255,255,0.88);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:12px}
 .quote-text{font-family:'Playfair Display',serif;font-size:16px;line-height:1.6;color:var(--text);margin-bottom:8px;font-style:italic}
 .quote-author{font-size:12px;color:var(--text-muted);font-weight:600}
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
-.stat-card{background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,240,254,0.9));border:1px solid var(--border);border-radius:16px;padding:18px}
+.stat-card{background:linear-gradient(135deg,rgba(255,255,255,0.92),rgba(255,244,251,0.92));border:1px solid var(--border);border-radius:16px;padding:18px}
 .stat-value{font-size:30px;font-weight:700;font-family:'Playfair Display',serif;color:var(--primary)}
 .stat-label{font-size:12px;color:var(--text-muted);margin-top:2px;font-weight:600}
 .alert{padding:12px 16px;border-radius:12px;font-size:13px;margin-bottom:16px;font-weight:600}
@@ -127,9 +121,11 @@ tr:hover td{background:var(--primary-light)}
 .checkbox-row{display:flex;align-items:center;gap:8px;cursor:pointer}
 .checkbox-row input[type=checkbox]{width:auto}
 .upload-area{border:2px dashed var(--border-strong);border-radius:14px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s;background:var(--primary-light)}
-.upload-area:hover{border-color:var(--primary);background:rgba(201,107,181,0.1)}
-.upload-area.dragover{border-color:var(--primary);background:rgba(201,107,181,0.14)}
-.upload-area.has-file{border-style:solid;border-color:var(--primary);background:rgba(201,107,181,0.07)}
+.upload-area:hover{border-color:var(--primary);background:rgba(204,136,187,0.08)}
+.upload-area.dragover{border-color:var(--primary);background:rgba(204,136,187,0.12)}
+.upload-area.has-file{border-style:solid;border-color:var(--primary);background:rgba(204,136,187,0.06)}
+.remember-row{display:flex;align-items:center;gap:8px;margin-bottom:14px;cursor:pointer;font-size:13px;font-weight:600;color:var(--text-muted)}
+.remember-row input{width:auto}
 </style>
 </head>
 <body>
@@ -169,6 +165,184 @@ function Avatar({name,size=28}){
   const color=colors[(name||'').charCodeAt(0)%colors.length];
   return <div style={{width:size,height:size,borderRadius:'50%',background:color,color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:size*0.38,fontWeight:700,flexShrink:0,border:'2px solid rgba(255,255,255,0.7)'}}>{initials}</div>;
 }
+
+const CuteBg = () => (
+  <div style={{position:'fixed',inset:0,zIndex:0,pointerEvents:'none',overflow:'hidden'}}>
+    {/* ── Watercolor blobs ── */}
+    <div style={{position:'absolute',width:480,height:380,borderRadius:'62% 38% 55% 45% / 50% 62% 38% 50%',filter:'blur(52px)',background:'rgba(238,168,192,0.75)',top:-70,left:-90}}/>
+    <div style={{position:'absolute',width:400,height:320,borderRadius:'45% 55% 40% 60% / 58% 42% 58% 42%',filter:'blur(48px)',background:'rgba(240,175,200,0.70)',bottom:-55,right:-65}}/>
+    <div style={{position:'absolute',width:260,height:210,borderRadius:'55% 45% 60% 40% / 42% 58% 42% 58%',filter:'blur(44px)',background:'rgba(225,165,210,0.60)',bottom:90,right:20}}/>
+    <div style={{position:'absolute',width:320,height:260,borderRadius:'50% 50% 45% 55% / 55% 45% 55% 45%',filter:'blur(50px)',background:'rgba(208,175,228,0.55)',top:'38%',left:'45%',transform:'translateX(-50%)' }}/>
+
+    {/* ── Large outline heart top-left ── */}
+    <svg style={{position:'absolute',top:90,left:18}} width="130" height="120" viewBox="0 0 130 120">
+      <path d="M65 100 C38 78 6 60 6 36 C6 18 20 6 36 6 C48 6 59 14 65 24 C71 14 82 6 94 6 C110 6 124 18 124 36 C124 60 92 78 65 100Z" fill="rgba(232,155,185,0.45)" stroke="rgba(215,130,165,0.6)" strokeWidth="2"/>
+    </svg>
+
+    {/* ── Small solid heart ── */}
+    <svg style={{position:'absolute',top:228,left:65}} width="38" height="35" viewBox="0 0 38 35">
+      <path d="M19 30 C10 22 1 17 1 9 C1 4 5 1 9 1 C13 1 16 3 19 6 C22 3 25 1 29 1 C33 1 37 4 37 9 C37 17 28 22 19 30Z" fill="rgba(228,148,178,0.72)"/>
+    </svg>
+
+    {/* ── Tiny heart ── */}
+    <svg style={{position:'absolute',top:182,left:188}} width="20" height="18" viewBox="0 0 20 18">
+      <path d="M10 15 C5 11 1 8 1 4 C1 2 3 1 5 1 C7 1 9 2 10 4 C11 2 13 1 15 1 C17 1 19 2 19 4 C19 8 15 11 10 15Z" fill="rgba(215,138,175,0.68)"/>
+    </svg>
+
+    {/* ── Dashed outline heart bottom-right ── */}
+    <svg style={{position:'absolute',bottom:145,right:25}} width="150" height="138" viewBox="0 0 150 138">
+      <path d="M75 118 C44 92 7 70 7 42 C7 21 23 7 42 7 C55 7 67 16 75 28 C83 16 95 7 108 7 C127 7 143 21 143 42 C143 70 106 92 75 118Z" fill="rgba(232,160,190,0.18)" stroke="rgba(210,130,168,0.65)" strokeWidth="2" strokeDasharray="6,5"/>
+    </svg>
+
+    {/* ── Scatter of tiny hearts ── */}
+    <svg style={{position:'absolute',top:55,right:195}} width="14" height="13" viewBox="0 0 14 13">
+      <path d="M7 11 C3 8 0 6 0 3C0 1 2 0 4 0C5 0 6 1 7 2C8 1 9 0 10 0C12 0 14 1 14 3C14 6 11 8 7 11Z" fill="rgba(225,140,175,0.65)"/>
+    </svg>
+    <svg style={{position:'absolute',top:395,right:115}} width="12" height="11" viewBox="0 0 12 11">
+      <path d="M6 9C3 7 0 5 0 3C0 1 1 0 3 0C4 0 5 1 6 2C7 1 8 0 9 0C11 0 12 1 12 3C12 5 9 7 6 9Z" fill="rgba(210,140,185,0.60)"/>
+    </svg>
+    <svg style={{position:'absolute',bottom:375,left:195}} width="11" height="10" viewBox="0 0 11 10">
+      <path d="M5.5 8.5C2.5 6.5 0 4.5 0 2.5C0 1 1 0 2.5 0C3.5 0 4.5 0.8 5.5 2C6.5 0.8 7.5 0 8.5 0C10 0 11 1 11 2.5C11 4.5 8.5 6.5 5.5 8.5Z" fill="rgba(200,145,190,0.60)"/>
+    </svg>
+    <svg style={{position:'absolute',bottom:80,left:75}} width="16" height="15" viewBox="0 0 16 15">
+      <path d="M8 13C4 10 0 7 0 4C0 1.5 2 0 4 0C5.5 0 7 1 8 2.5C9 1 10.5 0 12 0C14 0 16 1.5 16 4C16 7 12 10 8 13Z" fill="rgba(218,138,178,0.62)"/>
+    </svg>
+
+    {/* ── Sparkle star 1 (large, top right) ── */}
+    <svg style={{position:'absolute',top:42,right:88}} width="44" height="44" viewBox="0 0 44 44">
+      <line x1="22" y1="2" x2="22" y2="42" stroke="rgba(200,148,195,0.75)" strokeWidth="1.8"/>
+      <line x1="2" y1="22" x2="42" y2="22" stroke="rgba(200,148,195,0.75)" strokeWidth="1.8"/>
+      <line x1="7" y1="7" x2="37" y2="37" stroke="rgba(200,148,195,0.65)" strokeWidth="1.2"/>
+      <line x1="37" y1="7" x2="7" y2="37" stroke="rgba(200,148,195,0.65)" strokeWidth="1.2"/>
+      <circle cx="22" cy="22" r="2.5" fill="rgba(210,155,205,0.8)"/>
+    </svg>
+
+    {/* ── Sparkle star 2 (medium, mid right) ── */}
+    <svg style={{position:'absolute',top:208,right:52}} width="36" height="36" viewBox="0 0 36 36">
+      <line x1="18" y1="2" x2="18" y2="34" stroke="rgba(190,145,210,0.72)" strokeWidth="1.6"/>
+      <line x1="2" y1="18" x2="34" y2="18" stroke="rgba(190,145,210,0.72)" strokeWidth="1.6"/>
+      <line x1="6" y1="6" x2="30" y2="30" stroke="rgba(190,145,210,0.60)" strokeWidth="1.1"/>
+      <line x1="30" y1="6" x2="6" y2="30" stroke="rgba(190,145,210,0.60)" strokeWidth="1.1"/>
+      <circle cx="18" cy="18" r="2" fill="rgba(200,152,215,0.8)"/>
+    </svg>
+
+    {/* ── Sparkle star 3 (large, lower left) ── */}
+    <svg style={{position:'absolute',bottom:188,left:105}} width="50" height="50" viewBox="0 0 50 50">
+      <line x1="25" y1="2" x2="25" y2="48" stroke="rgba(195,145,205,0.70)" strokeWidth="1.8"/>
+      <line x1="2" y1="25" x2="48" y2="25" stroke="rgba(195,145,205,0.70)" strokeWidth="1.8"/>
+      <line x1="8" y1="8" x2="42" y2="42" stroke="rgba(195,145,205,0.58)" strokeWidth="1.2"/>
+      <line x1="42" y1="8" x2="8" y2="42" stroke="rgba(195,145,205,0.58)" strokeWidth="1.2"/>
+      <circle cx="25" cy="25" r="3" fill="rgba(205,152,210,0.82)"/>
+    </svg>
+
+    {/* ── Sparkle star 4 (small, top left area) ── */}
+    <svg style={{position:'absolute',top:310,right:148}} width="22" height="22" viewBox="0 0 22 22">
+      <line x1="11" y1="1" x2="11" y2="21" stroke="rgba(205,150,200,0.68)" strokeWidth="1.3"/>
+      <line x1="1" y1="11" x2="21" y2="11" stroke="rgba(205,150,200,0.68)" strokeWidth="1.3"/>
+      <line x1="4" y1="4" x2="18" y2="18" stroke="rgba(205,150,200,0.55)" strokeWidth="0.9"/>
+      <line x1="18" y1="4" x2="4" y2="18" stroke="rgba(205,150,200,0.55)" strokeWidth="0.9"/>
+    </svg>
+
+    {/* ── Tiny 4-point sparkle dots ── */}
+    <svg style={{position:'absolute',top:135,right:210}} width="12" height="12" viewBox="0 0 12 12">
+      <line x1="6" y1="0" x2="6" y2="12" stroke="rgba(210,155,200,0.65)" strokeWidth="1.2"/>
+      <line x1="0" y1="6" x2="12" y2="6" stroke="rgba(210,155,200,0.65)" strokeWidth="1.2"/>
+    </svg>
+    <svg style={{position:'absolute',top:75,left:225}} width="12" height="12" viewBox="0 0 12 12">
+      <line x1="6" y1="0" x2="6" y2="12" stroke="rgba(200,150,215,0.60)" strokeWidth="1.2"/>
+      <line x1="0" y1="6" x2="12" y2="6" stroke="rgba(200,150,215,0.60)" strokeWidth="1.2"/>
+    </svg>
+    <svg style={{position:'absolute',bottom:310,right:55}} width="10" height="10" viewBox="0 0 10 10">
+      <line x1="5" y1="0" x2="5" y2="10" stroke="rgba(210,148,205,0.62)" strokeWidth="1.1"/>
+      <line x1="0" y1="5" x2="10" y2="5" stroke="rgba(210,148,205,0.62)" strokeWidth="1.1"/>
+    </svg>
+
+    {/* ── Bow 1 (top right) ── */}
+    <svg style={{position:'absolute',top:52,right:44}} width="48" height="30" viewBox="0 0 48 30">
+      <path d="M24 15 C20 10 6 4 4 10 C2 16 14 18 24 15Z" fill="rgba(215,148,190,0.68)" stroke="rgba(200,128,175,0.6)" strokeWidth="1"/>
+      <path d="M24 15 C28 10 42 4 44 10 C46 16 34 18 24 15Z" fill="rgba(215,148,190,0.68)" stroke="rgba(200,128,175,0.6)" strokeWidth="1"/>
+      <path d="M24 15 C20 18 10 24 12 27 C14 29 22 24 24 15Z" fill="rgba(225,162,200,0.60)" stroke="rgba(200,128,175,0.5)" strokeWidth="1"/>
+      <path d="M24 15 C28 18 38 24 36 27 C34 29 26 24 24 15Z" fill="rgba(225,162,200,0.60)" stroke="rgba(200,128,175,0.5)" strokeWidth="1"/>
+      <circle cx="24" cy="15" r="3.5" fill="rgba(230,168,205,0.85)" stroke="rgba(200,128,175,0.5)" strokeWidth="1"/>
+    </svg>
+
+    {/* ── Bow 2 (left side) ── */}
+    <svg style={{position:'absolute',top:268,left:28}} width="40" height="25" viewBox="0 0 40 25">
+      <path d="M20 12 C17 8 5 3 3 8 C1 13 12 15 20 12Z" fill="rgba(205,148,200,0.65)" stroke="rgba(185,128,185,0.55)" strokeWidth="1"/>
+      <path d="M20 12 C23 8 35 3 37 8 C39 13 28 15 20 12Z" fill="rgba(205,148,200,0.65)" stroke="rgba(185,128,185,0.55)" strokeWidth="1"/>
+      <path d="M20 12 C17 15 8 20 10 23 C12 25 19 20 20 12Z" fill="rgba(218,160,210,0.55)" stroke="rgba(185,128,185,0.48)" strokeWidth="1"/>
+      <path d="M20 12 C23 15 32 20 30 23 C28 25 21 20 20 12Z" fill="rgba(218,160,210,0.55)" stroke="rgba(185,128,185,0.48)" strokeWidth="1"/>
+      <circle cx="20" cy="12" r="3" fill="rgba(222,165,208,0.82)" stroke="rgba(185,128,185,0.48)" strokeWidth="1"/>
+    </svg>
+
+    {/* ── Bow 3 (bottom right area) ── */}
+    <svg style={{position:'absolute',bottom:328,right:72}} width="36" height="22" viewBox="0 0 36 22">
+      <path d="M18 11 C15 7 4 2 2 7 C0 12 10 13 18 11Z" fill="rgba(210,152,195,0.62)" stroke="rgba(190,130,178,0.55)" strokeWidth="1"/>
+      <path d="M18 11 C21 7 32 2 34 7 C36 12 26 13 18 11Z" fill="rgba(210,152,195,0.62)" stroke="rgba(190,130,178,0.55)" strokeWidth="1"/>
+      <path d="M18 11 C15 14 7 18 9 21 C11 23 17 18 18 11Z" fill="rgba(220,162,205,0.52)"/>
+      <path d="M18 11 C21 14 29 18 27 21 C25 23 19 18 18 11Z" fill="rgba(220,162,205,0.52)"/>
+      <circle cx="18" cy="11" r="2.8" fill="rgba(222,162,205,0.80)"/>
+    </svg>
+
+    {/* ── Bow 4 (bottom left) ── */}
+    <svg style={{position:'absolute',bottom:108,left:168}} width="42" height="26" viewBox="0 0 42 26">
+      <path d="M21 13 C17 9 5 3 3 9 C1 14 13 16 21 13Z" fill="rgba(198,148,210,0.62)" stroke="rgba(178,128,195,0.52)" strokeWidth="1"/>
+      <path d="M21 13 C25 9 37 3 39 9 C41 14 29 16 21 13Z" fill="rgba(198,148,210,0.62)" stroke="rgba(178,128,195,0.52)" strokeWidth="1"/>
+      <path d="M21 13 C17 16 8 22 10 25 C12 27 20 22 21 13Z" fill="rgba(210,160,220,0.52)"/>
+      <path d="M21 13 C25 16 34 22 32 25 C30 27 22 22 21 13Z" fill="rgba(210,160,220,0.52)"/>
+      <circle cx="21" cy="13" r="3" fill="rgba(212,162,218,0.82)"/>
+    </svg>
+
+    {/* ── Butterfly 1 (bottom right, vivid) ── */}
+    <svg style={{position:'absolute',bottom:172,right:48}} width="42" height="36" viewBox="0 0 42 36">
+      <path d="M21 18 C16 11 3 5 5 13 C7 20 17 20 21 18Z" fill="rgba(220,100,155,0.80)"/>
+      <path d="M21 18 C26 11 39 5 37 13 C35 20 25 20 21 18Z" fill="rgba(220,100,155,0.80)"/>
+      <path d="M21 18 C17 22 6 26 8 31 C10 35 19 28 21 18Z" fill="rgba(238,148,188,0.72)"/>
+      <path d="M21 18 C25 22 36 26 34 31 C32 35 23 28 21 18Z" fill="rgba(238,148,188,0.72)"/>
+      <ellipse cx="15" cy="13" rx="3" ry="2" fill="rgba(255,200,225,0.50)" transform="rotate(-20,15,13)"/>
+      <ellipse cx="27" cy="13" rx="3" ry="2" fill="rgba(255,200,225,0.50)" transform="rotate(20,27,13)"/>
+      <line x1="21" y1="14" x2="18" y2="8" stroke="rgba(180,80,130,0.70)" strokeWidth="1" strokeLinecap="round"/>
+      <line x1="21" y1="14" x2="24" y2="8" stroke="rgba(180,80,130,0.70)" strokeWidth="1" strokeLinecap="round"/>
+      <circle cx="18" cy="7.5" r="1.2" fill="rgba(200,100,155,0.65)"/>
+      <circle cx="24" cy="7.5" r="1.2" fill="rgba(200,100,155,0.65)"/>
+    </svg>
+
+    {/* ── Butterfly 2 (small, upper area) ── */}
+    <svg style={{position:'absolute',top:158,right:170}} width="28" height="24" viewBox="0 0 28 24">
+      <path d="M14 12 C10 7 2 3 3 8 C4 13 11 13 14 12Z" fill="rgba(210,120,170,0.70)"/>
+      <path d="M14 12 C18 7 26 3 25 8 C24 13 17 13 14 12Z" fill="rgba(210,120,170,0.70)"/>
+      <path d="M14 12 C11 15 4 18 5 21 C6 23 13 19 14 12Z" fill="rgba(228,158,195,0.62)"/>
+      <path d="M14 12 C17 15 24 18 23 21 C22 23 15 19 14 12Z" fill="rgba(228,158,195,0.62)"/>
+      <line x1="14" y1="10" x2="12" y2="5" stroke="rgba(175,85,138,0.65)" strokeWidth="0.9" strokeLinecap="round"/>
+      <line x1="14" y1="10" x2="16" y2="5" stroke="rgba(175,85,138,0.65)" strokeWidth="0.9" strokeLinecap="round"/>
+    </svg>
+
+    {/* ── Butterfly 3 (tiny, mid-left) ── */}
+    <svg style={{position:'absolute',top:445,left:55}} width="22" height="18" viewBox="0 0 22 18">
+      <path d="M11 9 C8 5 1 2 2 6 C3 10 8 10 11 9Z" fill="rgba(215,110,165,0.65)"/>
+      <path d="M11 9 C14 5 21 2 20 6 C19 10 14 10 11 9Z" fill="rgba(215,110,165,0.65)"/>
+      <path d="M11 9 C8 11 3 14 4 16 C5 18 10 14 11 9Z" fill="rgba(232,158,195,0.58)"/>
+      <path d="M11 9 C14 11 19 14 18 16 C17 18 12 14 11 9Z" fill="rgba(232,158,195,0.58)"/>
+      <line x1="11" y1="8" x2="9" y2="4" stroke="rgba(178,80,135,0.60)" strokeWidth="0.8" strokeLinecap="round"/>
+      <line x1="11" y1="8" x2="13" y2="4" stroke="rgba(178,80,135,0.60)" strokeWidth="0.8" strokeLinecap="round"/>
+    </svg>
+
+    {/* ── Floating mini star cluster ── */}
+    <svg style={{position:'absolute',top:488,right:162}} width="18" height="18" viewBox="0 0 18 18">
+      <line x1="9" y1="1" x2="9" y2="17" stroke="rgba(205,148,202,0.65)" strokeWidth="1.2"/>
+      <line x1="1" y1="9" x2="17" y2="9" stroke="rgba(205,148,202,0.65)" strokeWidth="1.2"/>
+      <line x1="3" y1="3" x2="15" y2="15" stroke="rgba(205,148,202,0.52)" strokeWidth="0.9"/>
+      <line x1="15" y1="3" x2="3" y2="15" stroke="rgba(205,148,202,0.52)" strokeWidth="0.9"/>
+    </svg>
+    <svg style={{position:'absolute',bottom:255,left:30}} width="14" height="14" viewBox="0 0 14 14">
+      <line x1="7" y1="1" x2="7" y2="13" stroke="rgba(200,148,210,0.60)" strokeWidth="1.1"/>
+      <line x1="1" y1="7" x2="13" y2="7" stroke="rgba(200,148,210,0.60)" strokeWidth="1.1"/>
+      <line x1="3" y1="3" x2="11" y2="11" stroke="rgba(200,148,210,0.48)" strokeWidth="0.8"/>
+      <line x1="11" y1="3" x2="3" y2="11" stroke="rgba(200,148,210,0.48)" strokeWidth="0.8"/>
+    </svg>
+  </div>
+);
+
 function App(){
   const[users,setUsers]=useStorage('kw_users',[{id:1,name:"Admin",email:ADMIN_EMAIL,pass:ADMIN_PASS,status:"approved",role:"admin",joined:"2024-01-01"},...SAMPLE_USERS]);
   const[messages,setMessages]=useStorage('kw_messages',SAMPLE_MESSAGES);
@@ -176,7 +350,11 @@ function App(){
   const[session,setSession]=useStorage('kw_session',null);
   const[page,setPage]=useState('home');
   const[authTab,setAuthTab]=useState('login');
-  const[loginForm,setLoginForm]=useState({email:'',pass:''});
+  const[loginForm,setLoginForm]=useState(()=>{
+    try{const s=localStorage.getItem('kw_remember');return s?JSON.parse(s):{email:'',pass:''};}
+    catch{return{email:'',pass:''};}
+  });
+  const[rememberMe,setRememberMe]=useState(()=>!!localStorage.getItem('kw_remember'));
   const[regForm,setRegForm]=useState({name:'',email:'',pass:''});
   const[authErr,setAuthErr]=useState('');
   const[authOk,setAuthOk]=useState('');
@@ -188,6 +366,8 @@ function App(){
     if(!u){setAuthErr('Invalid email or password.');return;}
     if(u.status==='pending'){setAuthErr('Your account is awaiting admin approval.');return;}
     if(u.status==='denied'){setAuthErr('Your account has been denied.');return;}
+    if(rememberMe){localStorage.setItem('kw_remember',JSON.stringify({email:loginForm.email,pass:loginForm.pass}));}
+    else{localStorage.removeItem('kw_remember');}
     setSession({id:u.id});setAuthErr('');setPage('home');
   }
   function register(){
@@ -203,7 +383,6 @@ function App(){
   if(!currentUser){
     return(
       <div className="auth-wrap">
-        <div className="texture-overlay"/><div className="deco deco1"/><div className="deco deco2"/><div className="deco deco3"/><div className="deco deco4"/>
         <div className="auth-card">
           <div className="auth-logo"><h1>🌊 KindWave</h1><p>Spread positivity, one wave at a time</p></div>
           {authErr&&<div className="alert alert-warn">{authErr}</div>}
@@ -216,6 +395,10 @@ function App(){
             <>
               <div className="form-group"><label>Email</label><input type="email" value={loginForm.email} onChange={e=>setLoginForm(p=>({...p,email:e.target.value}))} placeholder="you@example.com"/></div>
               <div className="form-group"><label>Password</label><input type="password" value={loginForm.pass} onChange={e=>setLoginForm(p=>({...p,pass:e.target.value}))} placeholder="••••••••" onKeyDown={e=>e.key==='Enter'&&login()}/></div>
+              <label className="remember-row" style={{textTransform:'none',letterSpacing:0}}>
+                <input type="checkbox" checked={rememberMe} onChange={e=>setRememberMe(e.target.checked)}/>
+                Remember my login
+              </label>
               <button className="btn btn-primary" style={{width:'100%',justifyContent:'center'}} onClick={login}>Sign In ✨</button>
               <p className="text-muted" style={{textAlign:'center',marginTop:12,fontSize:11}}>Admin: admin@kindwave.com / admin123</p>
             </>
@@ -235,7 +418,6 @@ function App(){
 
   return(
     <div className="app">
-      <div className="texture-overlay"/><div className="deco deco1"/><div className="deco deco2"/><div className="deco deco3"/><div className="deco deco4"/>
       <div className="sidebar">
         <div className="sidebar-logo"><h1>🌊 KindWave</h1><p>Positivity platform</p></div>
         <nav className="nav">
@@ -733,7 +915,7 @@ function AdminQuotesPage({quotes,setQuotes}){
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+ReactDOM.createRoot(document.getElementById('root')).render(<><CuteBg/><App/></>);
 </script>
 </body>
 </html>
