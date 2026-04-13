@@ -303,7 +303,7 @@ function App(){
           {page==='send'&&<SendPage currentUser={currentUser} users={users} quotes={quotes} setMessages={setMessages} setPage={setPage}/>}
           {page==='inbox'&&<InboxPage currentUser={currentUser} messages={messages} users={users}/>}
           {page==='inspiration'&&<InspirationPage quotes={quotes.filter(q=>q.active)}/>}
-          {page==='admin-users'&&isAdmin&&<AdminUsersPage users={users} setUsers={setUsers} currentUser={currentUser}/>}
+          {page==='admin-users'&&isAdmin&&<AdminUsersPage users={users} setUsers={setUsers} currentUser={currentUser} messages={messages} setMessages={setMessages}/>}
           {page==='admin-messages'&&isAdmin&&<AdminMessagesPage messages={messages} users={users} setMessages={setMessages}/>}
           {page==='admin-quotes'&&isAdmin&&<AdminQuotesPage quotes={quotes} setQuotes={setQuotes}/>}
         </div>
@@ -577,17 +577,43 @@ function InspirationPage({quotes}){
   );
 }
 
-function AdminUsersPage({users,setUsers,currentUser}){
+function AdminUsersPage({users,setUsers,currentUser,messages,setMessages}){
   const[tab,setTab]=useState('pending');
+  const[confirmDelete,setConfirmDelete]=useState(null);
   const filtered=users.filter(u=>u.id!==1&&(tab==='all'||u.status===tab));
 
   function approve(id){setUsers(prev=>prev.map(u=>u.id===id?{...u,status:'approved'}:u));}
   function deny(id){setUsers(prev=>prev.map(u=>u.id===id?{...u,status:'denied'}:u));}
   function makeAdmin(id){setUsers(prev=>prev.map(u=>u.id===id?{...u,role:'admin'}:u));}
   function removeAdmin(id){setUsers(prev=>prev.map(u=>u.id===id?{...u,role:'user'}:u));}
+  function deleteUser(id){
+    setUsers(prev=>prev.filter(u=>u.id!==id));
+    setMessages(prev=>prev.filter(m=>m.fromId!==id&&m.toId!==id));
+    setConfirmDelete(null);
+  }
+
+  const userToDelete=confirmDelete?users.find(u=>u.id===confirmDelete):null;
 
   return(
     <div>
+      {confirmDelete&&userToDelete&&(
+        <div style={{position:'fixed',inset:0,background:'rgba(44,36,25,0.45)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:1000}}>
+          <div style={{background:'var(--card)',borderRadius:16,padding:28,maxWidth:380,width:'90%',border:'1px solid var(--border)'}}>
+            <div style={{fontSize:32,textAlign:'center',marginBottom:12}}>⚠️</div>
+            <h3 style={{textAlign:'center',marginBottom:8,fontSize:17}}>Delete user?</h3>
+            <p style={{textAlign:'center',color:'var(--text-muted)',fontSize:13,marginBottom:6}}>
+              You are about to permanently delete <strong>{userToDelete.name}</strong>.
+            </p>
+            <p style={{textAlign:'center',color:'var(--danger)',fontSize:12,marginBottom:22}}>
+              This will also delete all messages they sent or received. This cannot be undone.
+            </p>
+            <div className="gap-2" style={{justifyContent:'center'}}>
+              <button className="btn btn-danger" onClick={()=>deleteUser(confirmDelete)}>Yes, delete permanently</button>
+              <button className="btn btn-ghost" onClick={()=>setConfirmDelete(null)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="tabs">
         <div className={`tab ${tab==='pending'?'active':''}`} onClick={()=>setTab('pending')}>Pending ({users.filter(u=>u.status==='pending').length})</div>
         <div className={`tab ${tab==='approved'?'active':''}`} onClick={()=>setTab('approved')}>Approved</div>
@@ -608,11 +634,12 @@ function AdminUsersPage({users,setUsers,currentUser}){
                     <td><span className={`badge badge-${u.status}`}>{u.status}</span></td>
                     <td><span className={`badge ${u.role==='admin'?'badge-admin':'badge-anon'}`}>{u.role}</span></td>
                     <td>
-                      <div className="gap-2">
+                      <div className="gap-2" style={{flexWrap:'wrap'}}>
                         {u.status==='pending'&&<><button className="btn btn-success btn-sm" onClick={()=>approve(u.id)}>✓ Approve</button><button className="btn btn-danger btn-sm" onClick={()=>deny(u.id)}>✗ Deny</button></>}
                         {u.status==='denied'&&<button className="btn btn-ghost btn-sm" onClick={()=>approve(u.id)}>Approve</button>}
                         {u.status==='approved'&&u.role!=='admin'&&u.id!==currentUser.id&&<button className="btn btn-accent btn-sm" onClick={()=>makeAdmin(u.id)}>Make Admin</button>}
                         {u.role==='admin'&&u.id!==currentUser.id&&<button className="btn btn-ghost btn-sm" onClick={()=>removeAdmin(u.id)}>Remove Admin</button>}
+                        {u.id!==currentUser.id&&<button className="btn btn-danger btn-sm" style={{marginLeft:'auto'}} onClick={()=>setConfirmDelete(u.id)}>🗑 Delete</button>}
                       </div>
                     </td>
                   </tr>
