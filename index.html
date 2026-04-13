@@ -113,6 +113,49 @@ tr:hover td{background:var(--primary-light)}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
 .loading-screen h2{font-size:22px;font-weight:400;color:var(--primary)}
+
+/* ── Mobile responsive with hamburger ── */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border-radius:8px;background:none;border:none;z-index:200}
+.hamburger span{display:block;width:22px;height:2px;background:var(--primary);border-radius:2px;transition:all .25s}
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(58,32,64,0.35);z-index:98;backdrop-filter:blur(2px)}
+.mobile-overlay.open{display:block}
+
+@media (max-width: 768px) {
+  .hamburger{display:flex}
+  .sidebar{position:fixed;top:0;left:-260px;height:100vh;width:240px;z-index:99;transition:left .28s cubic-bezier(.4,0,.2,1);box-shadow:none}
+  .sidebar.open{left:0;box-shadow:4px 0 24px rgba(200,136,190,0.18)}
+  .app{flex-direction:column}
+  .main{width:100%;min-width:0}
+  .topbar{padding:0 12px;height:54px;position:sticky;top:0;z-index:50}
+  .topbar-title{font-size:15px}
+  .content{padding:16px}
+  .stats-grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .stat-card{padding:12px}
+  .stat-value{font-size:22px}
+  .stat-label{font-size:10px}
+  .grid-2{grid-template-columns:1fr}
+  .card{border-radius:14px;padding:14px}
+  .auth-card{padding:28px 20px;border-radius:18px;margin:0 4px}
+  .auth-logo h1{font-size:28px}
+  .btn{padding:8px 14px;font-size:13px}
+  .btn-sm{padding:4px 10px;font-size:11px}
+  .gap-2{gap:6px;flex-wrap:wrap}
+  .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tab{white-space:nowrap;padding:8px 14px;font-size:12px}
+  .msg-card{padding:12px}
+  .upload-area{padding:20px 12px}
+  .quote-text{font-size:14px}
+  .table-wrap{overflow-x:auto}
+  table{font-size:12px;min-width:500px}
+  th,td{padding:8px 10px}
+  .alert{font-size:12px;padding:10px 14px}
+  .empty{padding:32px 16px}
+  input,textarea,select{font-size:16px}
+}
+@media (max-width: 400px) {
+  .stats-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .stat-card:last-child{grid-column:span 2}
+}
 </style>
 </head>
 <body>
@@ -239,6 +282,8 @@ function App(){
   const[messages,setMessages]=useState([]);
   const[quotes,setQuotes]=useState([]);
   const[page,setPage]=useState('home');
+  const[menuOpen,setMenuOpen]=useState(false);
+  function goTo(p){setPage(p);setMenuOpen(false);}
   const[loading,setLoading]=useState(true);
   const[authTab,setAuthTab]=useState('login');
   const[loginForm,setLoginForm]=useState(()=>{try{const s=localStorage.getItem('kw_remember');return s?JSON.parse(s):{email:'',pass:''};}catch{return{email:'',pass:''};}});
@@ -380,19 +425,19 @@ function App(){
 
   return(<><CuteBg/>
     <div className="app">
-      <div className="sidebar">
+      <div className={`sidebar${menuOpen?' open':''}`}>
         <div className="sidebar-logo"><h1>🌊 KindWave</h1><p>Positivity platform</p></div>
         <nav className="nav">
           <div className="nav-section">Main</div>
-          <div className={`nav-item ${page==='home'?'active':''}`} onClick={()=>setPage('home')}><span className="icon">🏠</span>Home</div>
-          <div className={`nav-item ${page==='send'?'active':''}`} onClick={()=>setPage('send')}><span className="icon">💌</span>Send Kindness</div>
-          <div className={`nav-item ${page==='inbox'?'active':''}`} onClick={()=>setPage('inbox')}><span className="icon">📬</span>My Inbox</div>
-          <div className={`nav-item ${page==='inspiration'?'active':''}`} onClick={()=>setPage('inspiration')}><span className="icon">✨</span>Inspiration</div>
+          <div className={`nav-item ${page==='home'?'active':''}`} onClick={()=>goTo('home')}><span className="icon">🏠</span>Home</div>
+          <div className={`nav-item ${page==='send'?'active':''}`} onClick={()=>goTo('send')}><span className="icon">💌</span>Send Kindness</div>
+          <div className={`nav-item ${page==='inbox'?'active':''}`} onClick={()=>goTo('inbox')}><span className="icon">📬</span>My Inbox</div>
+          <div className={`nav-item ${page==='inspiration'?'active':''}`} onClick={()=>goTo('inspiration')}><span className="icon">✨</span>Inspiration</div>
           {isAdmin&&<>
             <div className="nav-section">Admin</div>
-            <div className={`nav-item ${page==='admin-users'?'active':''}`} onClick={()=>setPage('admin-users')}><span className="icon">👥</span>Users{pendingCount>0&&<span className="nav-badge">{pendingCount}</span>}</div>
-            <div className={`nav-item ${page==='admin-messages'?'active':''}`} onClick={()=>setPage('admin-messages')}><span className="icon">📋</span>All Messages</div>
-            <div className={`nav-item ${page==='admin-quotes'?'active':''}`} onClick={()=>setPage('admin-quotes')}><span className="icon">💬</span>Manage Quotes</div>
+            <div className={`nav-item ${page==='admin-users'?'active':''}`} onClick={()=>goTo('admin-users')}><span className="icon">👥</span>Users{pendingCount>0&&<span className="nav-badge">{pendingCount}</span>}</div>
+            <div className={`nav-item ${page==='admin-messages'?'active':''}`} onClick={()=>goTo('admin-messages')}><span className="icon">📋</span>All Messages</div>
+            <div className={`nav-item ${page==='admin-quotes'?'active':''}`} onClick={()=>goTo('admin-quotes')}><span className="icon">💬</span>Manage Quotes</div>
           </>}
         </nav>
         <div style={{padding:'12px 16px 20px',borderTop:'1px solid var(--border)'}}>
@@ -404,7 +449,14 @@ function App(){
         </div>
       </div>
       <div className="main">
+        <div className={`mobile-overlay${menuOpen?' open':''}`} onClick={()=>setMenuOpen(false)}/>
         <div className="topbar">
+          <div style={{display:'flex',alignItems:'center',gap:10}}>
+          <button className="hamburger" onClick={()=>setMenuOpen(o=>!o)} aria-label="Menu">
+            <span style={{transform:menuOpen?'rotate(45deg) translate(5px,5px)':'none'}}/>
+            <span style={{opacity:menuOpen?0:1}}/>
+            <span style={{transform:menuOpen?'rotate(-45deg) translate(5px,-5px)':'none'}}/>
+          </button>
           <div className="topbar-title">
             {page==='home'&&'Home 🌊'}{page==='send'&&'Send Kindness 💌'}{page==='inbox'&&'My Inbox 📬'}
             {page==='inspiration'&&'Inspiration ✨'}{page==='admin-users'&&'User Management'}
@@ -538,7 +590,7 @@ function SendPage({currentUser,users,quotes,setPage}){
   );}
 
   return(
-    <div style={{maxWidth:580}}>
+    <div style={{maxWidth:580,width:'100%'}}>
       <div className="card">
         <div style={{display:'flex',gap:8,marginBottom:24}}>
           {[1,2,3].map(s=><div key={s} style={{flex:1,height:5,borderRadius:3,background:step>=s?'var(--primary)':'var(--border)',transition:'background .3s'}}/>)}
@@ -561,7 +613,7 @@ function SendPage({currentUser,users,quotes,setPage}){
         {step===2&&(<>
           <h3 style={{marginBottom:4,fontWeight:400}}>What are you sending?</h3>
           <p className="text-muted" style={{marginBottom:20,fontSize:13}}>Choose the type of kindness to share.</p>
-          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:10,marginBottom:24}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:10,marginBottom:24}}>
             {[{type:'message',icon:'💬',label:'Message',desc:'A personal note'},{type:'quote',icon:'✨',label:'Quote',desc:'An inspiring quote'},{type:'media',icon:'🖼️',label:'Photo / GIF',desc:'Upload or link'}].map(t=>(
               <div key={t.type} onClick={()=>setForm(p=>({...p,type:t.type}))} style={{border:`2px solid ${form.type===t.type?'var(--primary)':'var(--border)'}`,borderRadius:14,padding:14,cursor:'pointer',textAlign:'center',background:form.type===t.type?'var(--primary-light)':'rgba(255,255,255,0.6)',transition:'all .15s'}}>
                 <div style={{fontSize:24,marginBottom:6}}>{t.icon}</div>
