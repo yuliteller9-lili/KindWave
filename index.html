@@ -4,144 +4,143 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>KindWave</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#FDF8F3;--surface:#FFFCF9;--card:#FFFFFF;
-  --primary:#E8845A;--primary-light:#FDF0E9;--primary-dark:#C4623A;
-  --accent:#5A8FE8;--accent-light:#EBF1FD;
-  --green:#5AB87A;--green-light:#EBF7EF;
-  --text:#2C2419;--text-muted:#7A6A5A;--text-light:#B0A090;
-  --border:#EDE0D0;--border-strong:#D4C4B0;
-  --danger:#E85A5A;--danger-light:#FDEBEB;
-  --warn:#E8B45A;--warn-light:#FDF5E5;
+  --bg:#FEF7FD;--surface:#FFF9FE;--card:#FFFFFF;
+  --primary:#C88ABE;--primary-light:#FAF0F8;--primary-dark:#9E66A0;
+  --accent:#A890D0;--accent-light:#F3EFFC;
+  --pink:#DFA8C8;--pink-light:#FEF2F8;
+  --green:#6DB87A;--green-light:#EBF7EF;
+  --text:#3A2040;--text-muted:#907898;--text-light:#C8B0C8;
+  --border:#F2DDEF;--border-strong:#DEB8DC;
+  --danger:#C87888;--danger-light:#FEF2F4;
+  --warn:#C8985A;--warn-light:#FDF4E5;
 }
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
-h1,h2,h3,.display{font-family:'Playfair Display',serif}
-
-.app{display:flex;height:100vh;overflow:hidden}
-.sidebar{width:220px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:0;flex-shrink:0}
-.sidebar-logo{padding:24px 20px 16px;border-bottom:1px solid var(--border)}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
+body::before{content:'';position:fixed;inset:0;background:
+  radial-gradient(ellipse at 12% 18%,rgba(210,155,200,0.20) 0%,transparent 44%),
+  radial-gradient(ellipse at 88% 80%,rgba(160,128,210,0.18) 0%,transparent 44%),
+  radial-gradient(ellipse at 52% 6%,rgba(230,175,215,0.14) 0%,transparent 38%),
+  radial-gradient(ellipse at 72% 48%,rgba(185,150,225,0.11) 0%,transparent 33%),
+  radial-gradient(ellipse at 16% 85%,rgba(218,150,200,0.13) 0%,transparent 36%),
+  radial-gradient(ellipse at 38% 55%,rgba(200,165,225,0.09) 0%,transparent 30%);
+  pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;inset:0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='1.5' fill='%23c88abe' fill-opacity='0.09'/%3E%3Ccircle cx='40' cy='8' r='1' fill='%23a890d0' fill-opacity='0.07'/%3E%3Ccircle cx='72' cy='8' r='1.5' fill='%23c88abe' fill-opacity='0.09'/%3E%3Ccircle cx='8' cy='40' r='1' fill='%23a890d0' fill-opacity='0.07'/%3E%3Ccircle cx='40' cy='40' r='2' fill='%23c88abe' fill-opacity='0.06'/%3E%3Ccircle cx='72' cy='40' r='1' fill='%23a890d0' fill-opacity='0.07'/%3E%3Ccircle cx='8' cy='72' r='1.5' fill='%23c88abe' fill-opacity='0.09'/%3E%3Ccircle cx='40' cy='72' r='1' fill='%23a890d0' fill-opacity='0.07'/%3E%3Ccircle cx='72' cy='72' r='1.5' fill='%23c88abe' fill-opacity='0.09'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cellipse cx='100' cy='100' rx='18' ry='8' fill='none' stroke='%23c88abe' stroke-opacity='0.04' stroke-width='1'/%3E%3Cellipse cx='30' cy='30' rx='10' ry='5' fill='none' stroke='%23a890d0' stroke-opacity='0.04' stroke-width='1'/%3E%3Cellipse cx='170' cy='170' rx='12' ry='6' fill='none' stroke='%23c88abe' stroke-opacity='0.04' stroke-width='1'/%3E%3Cellipse cx='170' cy='30' rx='8' ry='4' fill='none' stroke='%23a890d0' stroke-opacity='0.03' stroke-width='1'/%3E%3Cellipse cx='30' cy='170' rx='8' ry='4' fill='none' stroke='%23c88abe' stroke-opacity='0.03' stroke-width='1'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0}
+h1,h2,h3{font-family:'Playfair Display',serif}
+.app{display:flex;height:100vh;overflow:hidden;position:relative;z-index:1}
+.sidebar{width:230px;background:linear-gradient(180deg,#FFF5FE 0%,#F8F0FF 100%);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0}
+.sidebar-logo{padding:24px 20px 18px;border-bottom:1px solid var(--border)}
 .sidebar-logo h1{font-size:22px;color:var(--primary);letter-spacing:-0.5px}
-.sidebar-logo p{font-size:11px;color:var(--text-muted);font-family:'DM Sans',sans-serif;margin-top:2px}
-.nav{padding:12px 0;flex:1;overflow-y:auto}
-.nav-section{padding:8px 16px 4px;font-size:10px;font-weight:600;color:var(--text-light);letter-spacing:1px;text-transform:uppercase}
-.nav-item{display:flex;align-items:center;gap:10px;padding:9px 20px;cursor:pointer;font-size:13px;font-weight:500;color:var(--text-muted);border-left:3px solid transparent;transition:all .15s}
-.nav-item:hover{color:var(--text);background:var(--primary-light)}
-.nav-item.active{color:var(--primary);background:var(--primary-light);border-left-color:var(--primary)}
-.nav-item .icon{width:16px;text-align:center;font-size:14px}
-.nav-badge{margin-left:auto;background:var(--danger);color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:10px}
-
+.sidebar-logo p{font-size:11px;color:var(--text-muted);margin-top:2px}
+.nav{padding:14px 0;flex:1;overflow-y:auto}
+.nav-section{padding:8px 18px 4px;font-size:10px;font-weight:700;color:var(--text-light);letter-spacing:1.2px;text-transform:uppercase}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 18px;cursor:pointer;font-size:13px;font-weight:600;color:var(--text-muted);border-left:3px solid transparent;border-radius:0 10px 10px 0;margin:1px 8px 1px 0;transition:all .15s}
+.nav-item:hover{color:var(--primary);background:var(--primary-light)}
+.nav-item.active{color:var(--primary-dark);background:var(--primary-light);border-left-color:var(--primary)}
+.nav-item .icon{width:18px;text-align:center;font-size:15px}
+.nav-badge{margin-left:auto;background:var(--danger);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 28px;height:56px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.topbar-title{font-size:18px;font-weight:600;color:var(--text)}
+.topbar{background:rgba(255,245,254,0.92);border-bottom:1px solid var(--border);padding:0 28px;height:58px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.topbar-title{font-size:18px;font-weight:700;color:var(--text);font-family:'Playfair Display',serif}
 .topbar-right{display:flex;align-items:center;gap:12px}
-.user-pill{display:flex;align-items:center;gap:8px;background:var(--primary-light);padding:6px 12px;border-radius:20px;font-size:13px;font-weight:500;color:var(--primary-dark)}
-.avatar{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
-
 .content{flex:1;overflow-y:auto;padding:28px}
-
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px}
+.card{background:rgba(255,255,255,0.85);border:1px solid var(--border);border-radius:18px;padding:20px}
 .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.card-title{font-size:15px;font-weight:600;color:var(--text)}
-
-.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .15s;font-family:inherit}
-.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-dark)}
-.btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--border)}.btn-ghost:hover{background:var(--bg)}
-.btn-success{background:var(--green);color:#fff}.btn-success:hover{background:#3d9e60}
-.btn-danger{background:var(--danger);color:#fff}.btn-danger:hover{background:#c94040}
-.btn-accent{background:var(--accent);color:#fff}.btn-accent:hover{background:#3a6fce}
-.btn-sm{padding:5px 11px;font-size:12px}
-
-input,textarea,select{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;transition:border .15s}
-input:focus,textarea:focus,select:focus{border-color:var(--primary)}
+.card-title{font-size:15px;font-weight:700;color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .15s;font-family:'Nunito',sans-serif}
+.btn-primary{background:linear-gradient(135deg,#C888BE,#DFA8C8);color:#fff;box-shadow:0 2px 10px rgba(200,138,190,0.25)}.btn-primary:hover{box-shadow:0 4px 16px rgba(200,138,190,0.35);transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.5;transform:none;cursor:not-allowed}
+.btn-ghost{background:transparent;color:var(--text-muted);border:1.5px solid var(--border)}.btn-ghost:hover{background:var(--primary-light);border-color:var(--border-strong)}
+.btn-success{background:linear-gradient(135deg,var(--green),#4aa860);color:#fff}.btn-success:hover{opacity:.9}
+.btn-danger{background:linear-gradient(135deg,var(--danger),#b04060);color:#fff}.btn-danger:hover{opacity:.9}
+.btn-accent{background:linear-gradient(135deg,var(--accent),#7a50b0);color:#fff}.btn-accent:hover{opacity:.9}
+.btn-sm{padding:5px 14px;font-size:12px}
+input,textarea,select{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:13px;font-family:'Nunito',sans-serif;background:rgba(255,255,255,0.8);color:var(--text);outline:none;transition:border .15s,box-shadow .15s}
+input:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(201,107,181,0.12)}
 textarea{resize:vertical;min-height:80px}
-label{font-size:12px;font-weight:600;color:var(--text-muted);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px}
+label{font-size:11px;font-weight:700;color:var(--text-muted);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:0.6px}
 .form-group{margin-bottom:14px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-
-.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:20px}
-.auth-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px 32px;width:100%;max-width:400px}
+.auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;z-index:1}
+.deco{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(40px)}
+.deco1{width:400px;height:400px;background:#e0b0d8;opacity:0.18;top:-120px;left:-120px}
+.deco2{width:350px;height:350px;background:#b8a0e0;opacity:0.16;bottom:-100px;right:-100px}
+.deco3{width:250px;height:250px;background:#d8a8d0;opacity:0.14;top:30%;right:6%}
+.deco4{width:200px;height:200px;background:#c8b0e0;opacity:0.12;bottom:12%;left:4%}
+.texture-overlay{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:1;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:300px 300px}
+.auth-card{background:rgba(255,255,255,0.92);border:1px solid var(--border);border-radius:24px;padding:38px 34px;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(201,107,181,0.12)}
 .auth-logo{text-align:center;margin-bottom:28px}
-.auth-logo h1{font-size:32px;color:var(--primary)}
+.auth-logo h1{font-size:34px;color:var(--primary)}
 .auth-logo p{color:var(--text-muted);font-size:14px;margin-top:4px}
-.auth-tabs{display:flex;gap:0;margin-bottom:24px;border:1px solid var(--border);border-radius:10px;overflow:hidden}
-.auth-tab{flex:1;padding:9px;text-align:center;cursor:pointer;font-size:13px;font-weight:500;color:var(--text-muted);transition:all .15s}
-.auth-tab.active{background:var(--primary);color:#fff}
-
+.auth-tabs{display:flex;margin-bottom:24px;background:var(--bg);border-radius:50px;padding:3px}
+.auth-tab{flex:1;padding:9px;text-align:center;cursor:pointer;font-size:13px;font-weight:700;color:var(--text-muted);border-radius:50px;transition:all .2s}
+.auth-tab.active{background:linear-gradient(135deg,#C888BE,#DFA8C8);color:#fff;box-shadow:0 2px 8px rgba(200,138,190,0.25)}
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;padding:10px 14px;font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--border)}
+th{text-align:left;padding:10px 14px;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid var(--border)}
 td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--bg)}
-
-.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+tr:hover td{background:var(--primary-light)}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
 .badge-pending{background:var(--warn-light);color:#8a6010}
 .badge-approved{background:var(--green-light);color:#2a7045}
-.badge-admin{background:var(--accent-light);color:#1a4a9a}
-.badge-denied{background:var(--danger-light);color:#8a2020}
-.badge-anon{background:#F0EDE8;color:var(--text-muted)}
-
-.msg-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;position:relative}
+.badge-admin{background:var(--accent-light);color:#5a3090}
+.badge-denied{background:var(--danger-light);color:#8a2040}
+.badge-anon{background:var(--primary-light);color:var(--primary-dark)}
+.msg-card{background:rgba(255,255,255,0.85);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px}
 .msg-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
-.msg-from{font-size:12px;font-weight:600;color:var(--text-muted)}
-.msg-to{font-size:12px;color:var(--text-muted)}
-.msg-body{font-size:14px;line-height:1.6;color:var(--text)}
-.msg-type-badge{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600}
-.msg-type-quote{background:var(--accent-light);color:#1a4a9a}
+.msg-from{font-size:12px;font-weight:700;color:var(--text-muted)}
+.msg-body{font-size:14px;line-height:1.65;color:var(--text)}
+.msg-type-badge{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:700}
+.msg-type-quote{background:var(--accent-light);color:#5a3090}
 .msg-type-message{background:var(--green-light);color:#2a7045}
-.msg-type-media{background:var(--primary-light);color:var(--primary-dark)}
+.msg-type-media{background:var(--pink-light);color:#8a3060}
 .msg-time{font-size:11px;color:var(--text-light);margin-left:auto}
-
-.quote-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px}
-.quote-text{font-family:'Playfair Display',serif;font-size:16px;line-height:1.6;color:var(--text);margin-bottom:8px}
-.quote-author{font-size:12px;color:var(--text-muted);font-weight:500}
-
+.quote-card{background:rgba(255,255,255,0.85);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:12px}
+.quote-text{font-family:'Playfair Display',serif;font-size:16px;line-height:1.6;color:var(--text);margin-bottom:8px;font-style:italic}
+.quote-author{font-size:12px;color:var(--text-muted);font-weight:600}
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
-.stat-value{font-size:28px;font-weight:600;font-family:'Playfair Display',serif;color:var(--text)}
-.stat-label{font-size:12px;color:var(--text-muted);margin-top:2px}
-
-.alert{padding:12px 16px;border-radius:10px;font-size:13px;margin-bottom:16px}
+.stat-card{background:linear-gradient(135deg,rgba(255,255,255,0.9),rgba(255,240,254,0.9));border:1px solid var(--border);border-radius:16px;padding:18px}
+.stat-value{font-size:30px;font-weight:700;font-family:'Playfair Display',serif;color:var(--primary)}
+.stat-label{font-size:12px;color:var(--text-muted);margin-top:2px;font-weight:600}
+.alert{padding:12px 16px;border-radius:12px;font-size:13px;margin-bottom:16px;font-weight:600}
 .alert-warn{background:var(--warn-light);color:#7a5010;border:1px solid #f0d090}
 .alert-success{background:var(--green-light);color:#2a6040;border:1px solid #90d0a0}
-.alert-info{background:var(--accent-light);color:#1a3a8a;border:1px solid #90b0f0}
-
+.alert-info{background:var(--accent-light);color:#4a2080;border:1px solid #c0a0f0}
 .empty{text-align:center;padding:48px 20px;color:var(--text-muted)}
-.empty-icon{font-size:36px;margin-bottom:12px}
-.empty p{font-size:14px}
-
-.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:20px}
-.tab{padding:10px 18px;font-size:13px;font-weight:500;cursor:pointer;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
-.tab.active{color:var(--primary);border-bottom-color:var(--primary)}
-.tab:hover{color:var(--text)}
-
+.empty-icon{font-size:40px;margin-bottom:12px}
+.empty p{font-size:14px;font-weight:600}
+.tabs{display:flex;border-bottom:1.5px solid var(--border);margin-bottom:20px}
+.tab{padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;color:var(--text-muted);border-bottom:2.5px solid transparent;margin-bottom:-1.5px;transition:all .15s;border-radius:8px 8px 0 0}
+.tab.active{color:var(--primary);border-bottom-color:var(--primary);background:var(--primary-light)}
+.tab:hover{color:var(--primary)}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.mt-4{margin-top:16px}
-.gap-2{display:flex;gap:8px}
-.flex-between{display:flex;align-items:center;justify-content:space-between}
+.gap-2{display:flex;gap:8px;flex-wrap:wrap}
 .text-muted{color:var(--text-muted);font-size:13px}
-.separator{border:none;border-top:1px solid var(--border);margin:16px 0}
-.hidden{display:none}
 .checkbox-row{display:flex;align-items:center;gap:8px;cursor:pointer}
 .checkbox-row input[type=checkbox]{width:auto}
+.upload-area{border:2px dashed var(--border-strong);border-radius:14px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s;background:var(--primary-light)}
+.upload-area:hover{border-color:var(--primary);background:rgba(201,107,181,0.1)}
+.upload-area.dragover{border-color:var(--primary);background:rgba(201,107,181,0.14)}
+.upload-area.has-file{border-style:solid;border-color:var(--primary);background:rgba(201,107,181,0.07)}
 </style>
 </head>
 <body>
 <div id="root"></div>
-
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
 <script type="text/babel">
-const {useState,useEffect,useCallback,useMemo}=React;
-
+const {useState,useEffect,useRef}=React;
 const ADMIN_EMAIL="admin@kindwave.com";
 const ADMIN_PASS="admin123";
-
 const INITIAL_QUOTES=[
   {id:1,text:"You are braver than you believe, stronger than you seem, and smarter than you think.",author:"A.A. Milne",active:true},
   {id:2,text:"In the middle of every difficulty lies opportunity.",author:"Albert Einstein",active:true},
@@ -150,41 +149,28 @@ const INITIAL_QUOTES=[
   {id:5,text:"You don't have to be great to start, but you have to start to be great.",author:"Zig Ziglar",active:true},
   {id:6,text:"What you do today can improve all your tomorrows.",author:"Ralph Marston",active:true},
 ];
-
 const SAMPLE_USERS=[
   {id:2,name:"Sarah Chen",email:"sarah@example.com",pass:"pass123",status:"approved",role:"user",joined:"2024-01-15"},
   {id:3,name:"Marcus Webb",email:"marcus@example.com",pass:"pass123",status:"approved",role:"user",joined:"2024-01-18"},
   {id:4,name:"Priya Patel",email:"priya@example.com",pass:"pass123",status:"pending",role:"user",joined:"2024-01-20"},
 ];
-
 const SAMPLE_MESSAGES=[
-  {id:1,fromId:2,toId:3,fromName:"Sarah Chen",toName:"Marcus Webb",anonymous:false,type:"message",content:"Hey Marcus! I just wanted to say your presentation last Tuesday was amazing. The way you explained everything made it so clear for the whole team. Really appreciated it!",timestamp:"2024-01-19 10:23",flagged:false},
+  {id:1,fromId:2,toId:3,fromName:"Sarah Chen",toName:"Marcus Webb",anonymous:false,type:"message",content:"Hey Marcus! Your presentation was amazing. Really appreciated it!",timestamp:"2024-01-19 10:23",flagged:false},
   {id:2,fromId:3,toId:2,fromName:"Marcus Webb",toName:"Sarah Chen",anonymous:true,type:"quote",content:"The only way to do great work is to love what you do.",author:"Steve Jobs",timestamp:"2024-01-20 14:15",flagged:false},
 ];
-
 function useStorage(key,initial){
-  const[val,setVal]=useState(()=>{
-    try{
-      const s=localStorage.getItem(key);
-      return s?JSON.parse(s):initial;
-    }catch{return initial;}
-  });
+  const[val,setVal]=useState(()=>{try{const s=localStorage.getItem(key);return s?JSON.parse(s):initial;}catch{return initial;}});
   useEffect(()=>{try{localStorage.setItem(key,JSON.stringify(val));}catch{}},[key,val]);
   return[val,setVal];
 }
-
 function Avatar({name,size=28}){
   const initials=(name||'?').split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-  const colors=['#E8845A','#5A8FE8','#5AB87A','#E85A8F','#8F5AE8','#E8B45A'];
+  const colors=['#C96BB5','#9B6DD4','#E87BB5','#6DB87A','#D4875A','#5A9BD4'];
   const color=colors[(name||'').charCodeAt(0)%colors.length];
-  return <div style={{width:size,height:size,borderRadius:'50%',background:color,color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:size*0.38,fontWeight:600,flexShrink:0}}>{initials}</div>;
+  return <div style={{width:size,height:size,borderRadius:'50%',background:color,color:'#fff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:size*0.38,fontWeight:700,flexShrink:0,border:'2px solid rgba(255,255,255,0.7)'}}>{initials}</div>;
 }
-
 function App(){
-  const[users,setUsers]=useStorage('kw_users',[
-    {id:1,name:"Admin",email:ADMIN_EMAIL,pass:ADMIN_PASS,status:"approved",role:"admin",joined:"2024-01-01"},
-    ...SAMPLE_USERS
-  ]);
+  const[users,setUsers]=useStorage('kw_users',[{id:1,name:"Admin",email:ADMIN_EMAIL,pass:ADMIN_PASS,status:"approved",role:"admin",joined:"2024-01-01"},...SAMPLE_USERS]);
   const[messages,setMessages]=useStorage('kw_messages',SAMPLE_MESSAGES);
   const[quotes,setQuotes]=useStorage('kw_quotes',INITIAL_QUOTES);
   const[session,setSession]=useStorage('kw_session',null);
@@ -194,11 +180,9 @@ function App(){
   const[regForm,setRegForm]=useState({name:'',email:'',pass:''});
   const[authErr,setAuthErr]=useState('');
   const[authOk,setAuthOk]=useState('');
-
   const currentUser=session?users.find(u=>u.id===session.id):null;
   const isAdmin=currentUser?.role==='admin';
   const pendingCount=users.filter(u=>u.status==='pending').length;
-
   function login(){
     const u=users.find(u=>u.email===loginForm.email&&u.pass===loginForm.pass);
     if(!u){setAuthErr('Invalid email or password.');return;}
@@ -212,20 +196,16 @@ function App(){
     const nu={id:Date.now(),name:regForm.name,email:regForm.email,pass:regForm.pass,status:'pending',role:'user',joined:new Date().toISOString().split('T')[0]};
     setUsers(prev=>[...prev,nu]);
     setAuthOk('Account created! Please wait for admin approval before logging in.');
-    setRegForm({name:'',email:'',pass:''});
-    setAuthTab('login');
-    setAuthErr('');
+    setRegForm({name:'',email:'',pass:''});setAuthTab('login');setAuthErr('');
   }
   function logout(){setSession(null);setPage('home');}
 
   if(!currentUser){
     return(
       <div className="auth-wrap">
+        <div className="texture-overlay"/><div className="deco deco1"/><div className="deco deco2"/><div className="deco deco3"/><div className="deco deco4"/>
         <div className="auth-card">
-          <div className="auth-logo">
-            <h1>🌊 KindWave</h1>
-            <p>Spread positivity, one wave at a time</p>
-          </div>
+          <div className="auth-logo"><h1>🌊 KindWave</h1><p>Spread positivity, one wave at a time</p></div>
           {authErr&&<div className="alert alert-warn">{authErr}</div>}
           {authOk&&<div className="alert alert-success">{authOk}</div>}
           <div className="auth-tabs">
@@ -236,15 +216,15 @@ function App(){
             <>
               <div className="form-group"><label>Email</label><input type="email" value={loginForm.email} onChange={e=>setLoginForm(p=>({...p,email:e.target.value}))} placeholder="you@example.com"/></div>
               <div className="form-group"><label>Password</label><input type="password" value={loginForm.pass} onChange={e=>setLoginForm(p=>({...p,pass:e.target.value}))} placeholder="••••••••" onKeyDown={e=>e.key==='Enter'&&login()}/></div>
-              <button className="btn btn-primary" style={{width:'100%',justifyContent:'center'}} onClick={login}>Sign In</button>
-              <p className="text-muted" style={{textAlign:'center',marginTop:12,fontSize:12}}>Admin: admin@kindwave.com / admin123</p>
+              <button className="btn btn-primary" style={{width:'100%',justifyContent:'center'}} onClick={login}>Sign In ✨</button>
+              <p className="text-muted" style={{textAlign:'center',marginTop:12,fontSize:11}}>Admin: admin@kindwave.com / admin123</p>
             </>
           ):(
             <>
               <div className="form-group"><label>Your Name</label><input value={regForm.name} onChange={e=>setRegForm(p=>({...p,name:e.target.value}))} placeholder="Jane Smith"/></div>
               <div className="form-group"><label>Email</label><input type="email" value={regForm.email} onChange={e=>setRegForm(p=>({...p,email:e.target.value}))} placeholder="you@example.com"/></div>
               <div className="form-group"><label>Password</label><input type="password" value={regForm.pass} onChange={e=>setRegForm(p=>({...p,pass:e.target.value}))} placeholder="Choose a password"/></div>
-              <button className="btn btn-primary" style={{width:'100%',justifyContent:'center'}} onClick={register}>Request Account</button>
+              <button className="btn btn-primary" style={{width:'100%',justifyContent:'center'}} onClick={register}>Request Account 🌊</button>
               <p className="text-muted" style={{textAlign:'center',marginTop:10,fontSize:12}}>An admin will approve your account.</p>
             </>
           )}
@@ -255,11 +235,9 @@ function App(){
 
   return(
     <div className="app">
+      <div className="texture-overlay"/><div className="deco deco1"/><div className="deco deco2"/><div className="deco deco3"/><div className="deco deco4"/>
       <div className="sidebar">
-        <div className="sidebar-logo">
-          <h1>🌊 KindWave</h1>
-          <p>Positivity platform</p>
-        </div>
+        <div className="sidebar-logo"><h1>🌊 KindWave</h1><p>Positivity platform</p></div>
         <nav className="nav">
           <div className="nav-section">Main</div>
           <div className={`nav-item ${page==='home'?'active':''}`} onClick={()=>setPage('home')}><span className="icon">🏠</span>Home</div>
@@ -273,38 +251,33 @@ function App(){
             <div className={`nav-item ${page==='admin-quotes'?'active':''}`} onClick={()=>setPage('admin-quotes')}><span className="icon">💬</span>Manage Quotes</div>
           </>}
         </nav>
-        <div style={{padding:'12px 20px 20px',borderTop:'1px solid var(--border)'}}>
+        <div style={{padding:'12px 16px 20px',borderTop:'1px solid var(--border)'}}>
           <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:10}}>
             <Avatar name={currentUser.name}/>
-            <div><div style={{fontSize:13,fontWeight:600}}>{currentUser.name}</div><div style={{fontSize:11,color:'var(--text-muted)'}}>{currentUser.role==='admin'?'Admin':'Member'}</div></div>
+            <div><div style={{fontSize:13,fontWeight:700}}>{currentUser.name}</div><div style={{fontSize:11,color:'var(--text-muted)'}}>{currentUser.role==='admin'?'Admin ✨':'Member'}</div></div>
           </div>
           <button className="btn btn-ghost btn-sm" style={{width:'100%',justifyContent:'center'}} onClick={logout}>Sign Out</button>
         </div>
       </div>
-
       <div className="main">
         <div className="topbar">
           <div className="topbar-title">
-            {page==='home'&&'Home'}
-            {page==='send'&&'Send Kindness'}
-            {page==='inbox'&&'My Inbox'}
-            {page==='inspiration'&&'Inspiration'}
-            {page==='admin-users'&&'User Management'}
-            {page==='admin-messages'&&'All Messages (Admin)'}
-            {page==='admin-quotes'&&'Manage Quotes'}
+            {page==='home'&&'Home 🌊'}{page==='send'&&'Send Kindness 💌'}{page==='inbox'&&'My Inbox 📬'}
+            {page==='inspiration'&&'Inspiration ✨'}{page==='admin-users'&&'User Management'}
+            {page==='admin-messages'&&'All Messages'}{page==='admin-quotes'&&'Manage Quotes'}
           </div>
           <div className="topbar-right">
-            {isAdmin&&<span className="badge badge-admin">Admin</span>}
+            {isAdmin&&<span className="badge badge-admin">✨ Admin</span>}
             <Avatar name={currentUser.name}/>
           </div>
         </div>
         <div className="content">
-          {page==='home'&&<HomePage currentUser={currentUser} messages={messages} users={users} quotes={quotes} setPage={setPage}/>}
+          {page==='home'&&<HomePage currentUser={currentUser} messages={messages} quotes={quotes} setPage={setPage}/>}
           {page==='send'&&<SendPage currentUser={currentUser} users={users} quotes={quotes} setMessages={setMessages} setPage={setPage}/>}
-          {page==='inbox'&&<InboxPage currentUser={currentUser} messages={messages} users={users}/>}
+          {page==='inbox'&&<InboxPage currentUser={currentUser} messages={messages}/>}
           {page==='inspiration'&&<InspirationPage quotes={quotes.filter(q=>q.active)}/>}
           {page==='admin-users'&&isAdmin&&<AdminUsersPage users={users} setUsers={setUsers} currentUser={currentUser} messages={messages} setMessages={setMessages}/>}
-          {page==='admin-messages'&&isAdmin&&<AdminMessagesPage messages={messages} users={users} setMessages={setMessages}/>}
+          {page==='admin-messages'&&isAdmin&&<AdminMessagesPage messages={messages} setMessages={setMessages}/>}
           {page==='admin-quotes'&&isAdmin&&<AdminQuotesPage quotes={quotes} setQuotes={setQuotes}/>}
         </div>
       </div>
@@ -312,40 +285,44 @@ function App(){
   );
 }
 
-function HomePage({currentUser,messages,users,quotes,setPage}){
+function HomePage({currentUser,messages,quotes,setPage}){
   const myMessages=messages.filter(m=>m.toId===currentUser.id);
   const activeQ=quotes.filter(q=>q.active);
-  const randomQ=activeQ[Math.floor(Math.random()*activeQ.length)];
+  const[qi]=useState(()=>Math.floor(Math.random()*activeQ.length));
+  const randomQ=activeQ[qi];
   return(
     <div>
       <div style={{marginBottom:24}}>
-        <h2 style={{fontSize:22,fontWeight:400,color:'var(--text)',marginBottom:4}}>Welcome back, <span style={{color:'var(--primary)'}}>{currentUser.name.split(' ')[0]}</span> 🌊</h2>
+        <h2 style={{fontSize:24,fontWeight:400,marginBottom:4}}>Welcome back, <span style={{color:'var(--primary)'}}>{currentUser.name.split(' ')[0]}</span> 🌊</h2>
         <p className="text-muted">Spread some positivity today.</p>
       </div>
       <div className="stats-grid">
-        <div className="stat-card"><div className="stat-value">{myMessages.length}</div><div className="stat-label">Kind messages received</div></div>
+        <div className="stat-card"><div className="stat-value">{myMessages.length}</div><div className="stat-label">Kindness received</div></div>
         <div className="stat-card"><div className="stat-value">{messages.filter(m=>m.fromId===currentUser.id).length}</div><div className="stat-label">Kindness sent</div></div>
         <div className="stat-card"><div className="stat-value">{quotes.filter(q=>q.active).length}</div><div className="stat-label">Inspiration quotes</div></div>
       </div>
       {randomQ&&(
-        <div className="card" style={{marginBottom:20,background:'var(--primary-light)',border:'1px solid var(--border)'}}>
-          <div style={{fontSize:11,fontWeight:600,color:'var(--primary)',letterSpacing:1,textTransform:'uppercase',marginBottom:10}}>✨ Quote of the moment</div>
-          <div style={{fontFamily:'Playfair Display,serif',fontSize:17,lineHeight:1.6,color:'var(--text)',marginBottom:8}}>"{randomQ.text}"</div>
-          <div style={{fontSize:12,color:'var(--text-muted)',fontWeight:500}}>— {randomQ.author}</div>
+        <div style={{background:'linear-gradient(135deg,rgba(201,107,181,0.15),rgba(155,109,212,0.15))',border:'1px solid var(--border)',borderRadius:18,padding:24,marginBottom:20}}>
+          <div style={{fontSize:11,fontWeight:700,color:'var(--primary)',letterSpacing:1,textTransform:'uppercase',marginBottom:10}}>✨ Quote of the moment</div>
+          <div style={{fontFamily:'Playfair Display,serif',fontSize:17,lineHeight:1.65,color:'var(--text)',marginBottom:8,fontStyle:'italic'}}>"{randomQ.text}"</div>
+          <div style={{fontSize:12,color:'var(--text-muted)',fontWeight:600}}>— {randomQ.author}</div>
         </div>
       )}
       <div className="grid-2">
         <div className="card">
-          <div className="card-header"><div className="card-title">Recent for you</div></div>
+          <div className="card-header"><div className="card-title">Recent for you 💌</div></div>
           {myMessages.length===0?<div className="empty"><div className="empty-icon">💌</div><p>No messages yet</p></div>:
             myMessages.slice(-3).reverse().map(m=>(
               <div key={m.id} className="msg-card">
                 <div className="msg-meta">
                   <span className="msg-from">From: {m.anonymous?'Someone special 🎭':m.fromName}</span>
                   <span className={`msg-type-badge msg-type-${m.type}`}>{m.type}</span>
-                  <span className="msg-time">{m.timestamp}</span>
                 </div>
-                <div className="msg-body">{m.type==='quote'?`"${m.content}" — ${m.author||''}`:m.content}</div>
+                <div className="msg-body">
+                  {m.type==='quote'?<em>"{m.content}" {m.author&&`— ${m.author}`}</em>:m.content}
+                  {m.mediaData&&<div style={{marginTop:8}}><img src={m.mediaData} alt="shared" style={{maxWidth:'100%',maxHeight:180,borderRadius:10,objectFit:'contain'}}/></div>}
+                  {m.mediaUrl&&!m.mediaData&&<div style={{marginTop:8}}><img src={m.mediaUrl} alt="shared" style={{maxWidth:'100%',maxHeight:180,borderRadius:10,objectFit:'contain'}} onError={e=>e.target.style.display='none'}/></div>}
+                </div>
               </div>
             ))
           }
@@ -365,16 +342,27 @@ function HomePage({currentUser,messages,users,quotes,setPage}){
 
 function SendPage({currentUser,users,quotes,setMessages,setPage}){
   const[step,setStep]=useState(1);
-  const[form,setForm]=useState({toId:'',anonymous:false,type:'message',content:'',author:'',mediaUrl:''});
+  const[form,setForm]=useState({toId:'',anonymous:false,type:'message',content:'',author:'',mediaUrl:'',mediaData:null,mediaName:''});
   const[sent,setSent]=useState(false);
   const[selectedQuote,setSelectedQuote]=useState(null);
   const[quoteFilter,setQuoteFilter]=useState('');
+  const[dragOver,setDragOver]=useState(false);
+  const fileRef=useRef();
 
   const approvedUsers=users.filter(u=>u.status==='approved'&&u.id!==currentUser.id);
   const activeQuotes=quotes.filter(q=>q.active&&q.text.toLowerCase().includes(quoteFilter.toLowerCase()));
 
+  function handleFile(file){
+    if(!file)return;
+    if(!file.type.startsWith('image/')){alert('Please select an image file.');return;}
+    if(file.size>5*1024*1024){alert('Image must be under 5MB.');return;}
+    const reader=new FileReader();
+    reader.onload=e=>setForm(p=>({...p,mediaData:e.target.result,mediaName:file.name,mediaUrl:''}));
+    reader.readAsDataURL(file);
+  }
+
   function send(){
-    if(!form.toId){return;}
+    if(!form.toId)return;
     const toUser=users.find(u=>u.id===parseInt(form.toId));
     const nm={
       id:Date.now(),fromId:currentUser.id,toId:parseInt(form.toId),
@@ -383,21 +371,26 @@ function SendPage({currentUser,users,quotes,setMessages,setPage}){
       content:form.type==='quote'?(selectedQuote?.text||form.content):form.content,
       author:form.type==='quote'?(selectedQuote?.author||form.author):'',
       mediaUrl:form.type==='media'?form.mediaUrl:'',
+      mediaData:form.type==='media'?form.mediaData:null,
+      mediaName:form.type==='media'?form.mediaName:'',
       timestamp:new Date().toLocaleString('en-US',{month:'2-digit',day:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),
       flagged:false
     };
-    setMessages(prev=>[...prev,nm]);
-    setSent(true);
+    setMessages(prev=>[...prev,nm]);setSent(true);
   }
+
+  function resetSend(){setSent(false);setForm({toId:'',anonymous:false,type:'message',content:'',author:'',mediaUrl:'',mediaData:null,mediaName:''});setSelectedQuote(null);setStep(1);}
+
+  const canSend=form.type==='media'?(form.mediaData||form.mediaUrl):(form.content);
 
   if(sent){
     return(
       <div style={{textAlign:'center',padding:'60px 20px'}}>
-        <div style={{fontSize:52,marginBottom:16}}>🌊</div>
-        <h2 style={{fontSize:24,fontWeight:400,marginBottom:8}}>Your wave of kindness was sent!</h2>
+        <div style={{fontSize:56,marginBottom:16}}>🌊</div>
+        <h2 style={{fontSize:26,fontWeight:400,marginBottom:8}}>Your wave of kindness was sent!</h2>
         <p className="text-muted" style={{marginBottom:24}}>You made someone's day a little brighter.</p>
         <div className="gap-2" style={{justifyContent:'center'}}>
-          <button className="btn btn-primary" onClick={()=>{setSent(false);setForm({toId:'',anonymous:false,type:'message',content:'',author:'',mediaUrl:''});setSelectedQuote(null);setStep(1);}}>Send Another</button>
+          <button className="btn btn-primary" onClick={resetSend}>Send Another 💌</button>
           <button className="btn btn-ghost" onClick={()=>setPage('home')}>Go Home</button>
         </div>
       </div>
@@ -405,17 +398,16 @@ function SendPage({currentUser,users,quotes,setMessages,setPage}){
   }
 
   return(
-    <div style={{maxWidth:560}}>
+    <div style={{maxWidth:580}}>
       <div className="card">
         <div style={{display:'flex',gap:8,marginBottom:24}}>
           {[1,2,3].map(s=>(
-            <div key={s} style={{flex:1,height:4,borderRadius:2,background:step>=s?'var(--primary)':'var(--border)',transition:'background .3s'}}/>
+            <div key={s} style={{flex:1,height:5,borderRadius:3,background:step>=s?'var(--primary)':'var(--border)',transition:'background .3s'}}/>
           ))}
         </div>
-
         {step===1&&(
           <>
-            <h3 style={{marginBottom:4}}>Who are you sending to?</h3>
+            <h3 style={{marginBottom:4,fontWeight:400}}>Who are you sending to?</h3>
             <p className="text-muted" style={{marginBottom:20,fontSize:13}}>Choose a recipient and whether to stay anonymous.</p>
             <div className="form-group">
               <label>Recipient</label>
@@ -424,27 +416,26 @@ function SendPage({currentUser,users,quotes,setMessages,setPage}){
                 {approvedUsers.map(u=><option key={u.id} value={u.id}>{u.name}</option>)}
               </select>
             </div>
-            <label className="checkbox-row" style={{marginBottom:20}}>
+            <label className="checkbox-row" style={{marginBottom:20,textTransform:'none',letterSpacing:0,fontSize:13,fontWeight:600,color:'var(--text)'}}>
               <input type="checkbox" checked={form.anonymous} onChange={e=>setForm(p=>({...p,anonymous:e.target.checked}))}/> 
-              <span style={{fontSize:13}}>Send anonymously <span style={{color:'var(--text-muted)'}}>(they won't know it's you)</span></span>
+              Send anonymously <span style={{color:'var(--text-muted)',fontWeight:400}}>(they won't know it's you)</span>
             </label>
             <button className="btn btn-primary" disabled={!form.toId} onClick={()=>setStep(2)}>Next →</button>
           </>
         )}
-
         {step===2&&(
           <>
-            <h3 style={{marginBottom:4}}>What are you sending?</h3>
+            <h3 style={{marginBottom:4,fontWeight:400}}>What are you sending?</h3>
             <p className="text-muted" style={{marginBottom:20,fontSize:13}}>Choose the type of kindness to share.</p>
             <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:10,marginBottom:24}}>
               {[
-                {type:'message',icon:'💬',label:'Message',desc:'A personal note or appreciation'},
+                {type:'message',icon:'💬',label:'Message',desc:'A personal note'},
                 {type:'quote',icon:'✨',label:'Quote',desc:'An inspiring quote'},
-                {type:'media',icon:'🎉',label:'Media / GIF',desc:'A funny or uplifting link'},
+                {type:'media',icon:'🖼️',label:'Photo / GIF',desc:'Upload or link'},
               ].map(t=>(
-                <div key={t.type} onClick={()=>setForm(p=>({...p,type:t.type}))} style={{border:`2px solid ${form.type===t.type?'var(--primary)':'var(--border)'}`,borderRadius:12,padding:14,cursor:'pointer',textAlign:'center',background:form.type===t.type?'var(--primary-light)':'var(--surface)',transition:'all .15s'}}>
-                  <div style={{fontSize:22,marginBottom:6}}>{t.icon}</div>
-                  <div style={{fontSize:13,fontWeight:600,marginBottom:3}}>{t.label}</div>
+                <div key={t.type} onClick={()=>setForm(p=>({...p,type:t.type}))} style={{border:`2px solid ${form.type===t.type?'var(--primary)':'var(--border)'}`,borderRadius:14,padding:14,cursor:'pointer',textAlign:'center',background:form.type===t.type?'var(--primary-light)':'rgba(255,255,255,0.6)',transition:'all .15s'}}>
+                  <div style={{fontSize:24,marginBottom:6}}>{t.icon}</div>
+                  <div style={{fontSize:13,fontWeight:700,marginBottom:3}}>{t.label}</div>
                   <div style={{fontSize:11,color:'var(--text-muted)'}}>{t.desc}</div>
                 </div>
               ))}
@@ -455,29 +446,22 @@ function SendPage({currentUser,users,quotes,setMessages,setPage}){
             </div>
           </>
         )}
-
         {step===3&&(
           <>
-            <h3 style={{marginBottom:4}}>Write your message</h3>
+            <h3 style={{marginBottom:4,fontWeight:400}}>Write your message</h3>
             <p className="text-muted" style={{marginBottom:20,fontSize:13}}>
-              Sending to <strong>{users.find(u=>u.id===parseInt(form.toId))?.name}</strong>
-              {form.anonymous?' anonymously':''}
+              Sending to <strong>{users.find(u=>u.id===parseInt(form.toId))?.name}</strong>{form.anonymous?' anonymously':''}
             </p>
-
             {form.type==='message'&&(
               <div className="form-group">
                 <label>Your message</label>
                 <textarea value={form.content} onChange={e=>setForm(p=>({...p,content:e.target.value}))} placeholder="Share something positive, an appreciation, or an uplifting thought..." style={{minHeight:120}}/>
               </div>
             )}
-
             {form.type==='quote'&&(
               <>
-                <div className="form-group">
-                  <label>Search quotes</label>
-                  <input value={quoteFilter} onChange={e=>setQuoteFilter(e.target.value)} placeholder="Filter quotes..."/>
-                </div>
-                <div style={{maxHeight:200,overflowY:'auto',marginBottom:12,border:'1px solid var(--border)',borderRadius:10}}>
+                <div className="form-group"><label>Search quotes</label><input value={quoteFilter} onChange={e=>setQuoteFilter(e.target.value)} placeholder="Filter quotes..."/></div>
+                <div style={{maxHeight:200,overflowY:'auto',marginBottom:12,border:'1px solid var(--border)',borderRadius:12}}>
                   {activeQuotes.length===0?<div style={{padding:16,textAlign:'center',color:'var(--text-muted)',fontSize:13}}>No quotes found</div>:
                     activeQuotes.map(q=>(
                       <div key={q.id} onClick={()=>{setSelectedQuote(q);setForm(p=>({...p,content:q.text,author:q.author}));}} style={{padding:'10px 14px',cursor:'pointer',borderBottom:'1px solid var(--border)',background:selectedQuote?.id===q.id?'var(--primary-light)':'',transition:'background .1s'}}>
@@ -492,26 +476,45 @@ function SendPage({currentUser,users,quotes,setMessages,setPage}){
                 <div className="form-group"><label>Author</label><input value={form.author} onChange={e=>setForm(p=>({...p,author:e.target.value}))} placeholder="Author name"/></div>
               </>
             )}
-
             {form.type==='media'&&(
               <>
                 <div className="form-group">
-                  <label>Link (GIF, image, video, meme)</label>
-                  <input value={form.mediaUrl} onChange={e=>setForm(p=>({...p,mediaUrl:e.target.value}))} placeholder="https://..."/>
+                  <label>Upload a photo, GIF or meme</label>
+                  <div
+                    className={`upload-area${form.mediaData?' has-file':''}${dragOver?' dragover':''}`}
+                    onClick={()=>fileRef.current.click()}
+                    onDragOver={e=>{e.preventDefault();setDragOver(true);}}
+                    onDragLeave={()=>setDragOver(false)}
+                    onDrop={e=>{e.preventDefault();setDragOver(false);handleFile(e.dataTransfer.files[0]);}}
+                  >
+                    {form.mediaData?(
+                      <>
+                        <img src={form.mediaData} alt="preview" style={{maxWidth:'100%',maxHeight:200,borderRadius:10,objectFit:'contain'}}/>
+                        <div style={{marginTop:8,fontSize:12,color:'var(--primary)',fontWeight:600}}>{form.mediaName}</div>
+                        <div style={{fontSize:11,color:'var(--text-muted)',marginTop:4}}>Click to change image</div>
+                      </>
+                    ):(
+                      <>
+                        <div style={{fontSize:36,marginBottom:8}}>🖼️</div>
+                        <div style={{fontSize:13,fontWeight:700,color:'var(--primary)',marginBottom:4}}>Click to upload or drag & drop</div>
+                        <div style={{fontSize:12,color:'var(--text-muted)'}}>JPG, PNG, GIF, WebP — max 5MB</div>
+                      </>
+                    )}
+                    <input ref={fileRef} type="file" accept="image/*" style={{display:'none'}} onChange={e=>handleFile(e.target.files[0])}/>
+                  </div>
                 </div>
+                <div style={{textAlign:'center',margin:'6px 0 10px',fontSize:12,color:'var(--text-muted)',fontWeight:600}}>— or paste a link instead —</div>
                 <div className="form-group">
-                  <label>Add a note (optional)</label>
-                  <textarea value={form.content} onChange={e=>setForm(p=>({...p,content:e.target.value}))} placeholder="Add a message to go with it..." style={{minHeight:70}}/>
+                  <label>Image / GIF URL (optional)</label>
+                  <input value={form.mediaUrl} onChange={e=>setForm(p=>({...p,mediaUrl:e.target.value,mediaData:null,mediaName:''}))} placeholder="https://media.giphy.com/..."/>
+                  {form.mediaUrl&&!form.mediaData&&<img src={form.mediaUrl} alt="preview" style={{maxWidth:'100%',maxHeight:160,borderRadius:10,objectFit:'contain',marginTop:8}} onError={e=>e.target.style.display='none'}/>}
                 </div>
-                {form.mediaUrl&&(form.mediaUrl.includes('.gif')||form.mediaUrl.includes('giphy')||form.mediaUrl.includes('.jpg')||form.mediaUrl.includes('.png'))&&(
-                  <div style={{marginBottom:12}}><img src={form.mediaUrl} alt="preview" style={{maxWidth:'100%',maxHeight:160,borderRadius:8,objectFit:'cover'}} onError={e=>e.target.style.display='none'}/></div>
-                )}
+                <div className="form-group"><label>Add a note (optional)</label><textarea value={form.content} onChange={e=>setForm(p=>({...p,content:e.target.value}))} placeholder="Add a message to go with it..." style={{minHeight:70}}/></div>
               </>
             )}
-
             <div className="gap-2">
               <button className="btn btn-ghost" onClick={()=>setStep(2)}>← Back</button>
-              <button className="btn btn-primary" disabled={!form.content&&!form.mediaUrl} onClick={send}>🌊 Send Wave</button>
+              <button className="btn btn-primary" disabled={!canSend} onClick={send}>🌊 Send Wave</button>
             </div>
           </>
         )}
@@ -520,12 +523,11 @@ function SendPage({currentUser,users,quotes,setMessages,setPage}){
   );
 }
 
-function InboxPage({currentUser,messages,users}){
+function InboxPage({currentUser,messages}){
   const[tab,setTab]=useState('received');
   const received=messages.filter(m=>m.toId===currentUser.id).reverse();
   const sent=messages.filter(m=>m.fromId===currentUser.id).reverse();
   const list=tab==='received'?received:sent;
-
   return(
     <div>
       <div className="tabs">
@@ -539,11 +541,12 @@ function InboxPage({currentUser,messages,users}){
               {tab==='received'?<span className="msg-from">From: {m.anonymous?<span>Someone special 🎭</span>:m.fromName}</span>:<span className="msg-from">To: {m.toName}</span>}
               <span className={`msg-type-badge msg-type-${m.type}`}>{m.type}</span>
               <span className="msg-time">{m.timestamp}</span>
-              {tab==='sent'&&m.anonymous&&<span className="badge badge-anon" style={{fontSize:10}}>sent anonymously</span>}
+              {tab==='sent'&&m.anonymous&&<span className="badge badge-anon">anonymous</span>}
             </div>
             <div className="msg-body">
               {m.type==='quote'?<em>"{m.content}" {m.author&&`— ${m.author}`}</em>:m.content}
-              {m.mediaUrl&&<div style={{marginTop:8}}><a href={m.mediaUrl} target="_blank" rel="noopener noreferrer" style={{color:'var(--accent)',fontSize:13}}>🔗 View media</a></div>}
+              {m.mediaData&&<div style={{marginTop:8}}><img src={m.mediaData} alt="shared" style={{maxWidth:'100%',maxHeight:220,borderRadius:10,objectFit:'contain'}}/></div>}
+              {m.mediaUrl&&!m.mediaData&&<div style={{marginTop:8}}><img src={m.mediaUrl} alt="shared" style={{maxWidth:'100%',maxHeight:220,borderRadius:10,objectFit:'contain'}} onError={e=>e.target.style.display='none'}/></div>}
             </div>
           </div>
         ))
@@ -553,18 +556,18 @@ function InboxPage({currentUser,messages,users}){
 }
 
 function InspirationPage({quotes}){
-  const[featured,setFeatured]=useState(()=>quotes[Math.floor(Math.random()*quotes.length)]);
+  const[idx,setIdx]=useState(()=>Math.floor(Math.random()*Math.max(quotes.length,1)));
+  if(!quotes.length)return <div className="empty"><div className="empty-icon">✨</div><p>No quotes yet</p></div>;
+  const featured=quotes[idx%quotes.length];
   return(
     <div>
-      {featured&&(
-        <div className="card" style={{background:'var(--primary-light)',borderColor:'var(--primary)',marginBottom:24,padding:28,textAlign:'center'}}>
-          <div style={{fontSize:11,fontWeight:600,color:'var(--primary)',letterSpacing:1,textTransform:'uppercase',marginBottom:14}}>✨ Featured Quote</div>
-          <div style={{fontFamily:'Playfair Display,serif',fontSize:22,lineHeight:1.6,color:'var(--text)',marginBottom:12}}>"{featured.text}"</div>
-          <div style={{fontSize:13,color:'var(--text-muted)',fontWeight:500}}>— {featured.author}</div>
-          <button className="btn btn-ghost btn-sm" style={{marginTop:16}} onClick={()=>setFeatured(quotes[Math.floor(Math.random()*quotes.length)])}>Shuffle ↻</button>
-        </div>
-      )}
-      <h3 style={{marginBottom:16,fontSize:15,fontWeight:600}}>All Quotes ({quotes.length})</h3>
+      <div style={{background:'linear-gradient(135deg,rgba(201,107,181,0.18),rgba(155,109,212,0.18))',border:'1px solid var(--border)',borderRadius:20,padding:32,marginBottom:28,textAlign:'center'}}>
+        <div style={{fontSize:11,fontWeight:700,color:'var(--primary)',letterSpacing:1.2,textTransform:'uppercase',marginBottom:14}}>✨ Featured Quote</div>
+        <div style={{fontFamily:'Playfair Display,serif',fontSize:22,lineHeight:1.65,color:'var(--text)',marginBottom:12,fontStyle:'italic'}}>"{featured.text}"</div>
+        <div style={{fontSize:13,color:'var(--text-muted)',fontWeight:600}}>— {featured.author}</div>
+        <button className="btn btn-ghost btn-sm" style={{marginTop:18}} onClick={()=>setIdx(i=>(i+1)%quotes.length)}>Shuffle ↻</button>
+      </div>
+      <h3 style={{marginBottom:16,fontSize:16,fontWeight:700}}>All Quotes ({quotes.length})</h3>
       <div style={{columns:2,columnGap:16}}>
         {quotes.map(q=>(
           <div key={q.id} className="quote-card" style={{breakInside:'avoid',marginBottom:12}}>
@@ -581,34 +584,23 @@ function AdminUsersPage({users,setUsers,currentUser,messages,setMessages}){
   const[tab,setTab]=useState('pending');
   const[confirmDelete,setConfirmDelete]=useState(null);
   const filtered=users.filter(u=>u.id!==1&&(tab==='all'||u.status===tab));
-
   function approve(id){setUsers(prev=>prev.map(u=>u.id===id?{...u,status:'approved'}:u));}
   function deny(id){setUsers(prev=>prev.map(u=>u.id===id?{...u,status:'denied'}:u));}
   function makeAdmin(id){setUsers(prev=>prev.map(u=>u.id===id?{...u,role:'admin'}:u));}
   function removeAdmin(id){setUsers(prev=>prev.map(u=>u.id===id?{...u,role:'user'}:u));}
-  function deleteUser(id){
-    setUsers(prev=>prev.filter(u=>u.id!==id));
-    setMessages(prev=>prev.filter(m=>m.fromId!==id&&m.toId!==id));
-    setConfirmDelete(null);
-  }
-
+  function deleteUser(id){setUsers(prev=>prev.filter(u=>u.id!==id));setMessages(prev=>prev.filter(m=>m.fromId!==id&&m.toId!==id));setConfirmDelete(null);}
   const userToDelete=confirmDelete?users.find(u=>u.id===confirmDelete):null;
-
   return(
     <div>
       {confirmDelete&&userToDelete&&(
-        <div style={{position:'fixed',inset:0,background:'rgba(44,36,25,0.45)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:1000}}>
-          <div style={{background:'var(--card)',borderRadius:16,padding:28,maxWidth:380,width:'90%',border:'1px solid var(--border)'}}>
-            <div style={{fontSize:32,textAlign:'center',marginBottom:12}}>⚠️</div>
-            <h3 style={{textAlign:'center',marginBottom:8,fontSize:17}}>Delete user?</h3>
-            <p style={{textAlign:'center',color:'var(--text-muted)',fontSize:13,marginBottom:6}}>
-              You are about to permanently delete <strong>{userToDelete.name}</strong>.
-            </p>
-            <p style={{textAlign:'center',color:'var(--danger)',fontSize:12,marginBottom:22}}>
-              This will also delete all messages they sent or received. This cannot be undone.
-            </p>
+        <div style={{position:'fixed',inset:0,background:'rgba(58,31,58,0.5)',display:'flex',alignItems:'center',justifyContent:'center',zIndex:1000}}>
+          <div style={{background:'var(--card)',borderRadius:20,padding:32,maxWidth:380,width:'90%',border:'1px solid var(--border)',textAlign:'center'}}>
+            <div style={{fontSize:36,marginBottom:12}}>⚠️</div>
+            <h3 style={{marginBottom:8,fontSize:18,fontWeight:400}}>Delete user?</h3>
+            <p style={{color:'var(--text-muted)',fontSize:13,marginBottom:6}}>Permanently delete <strong>{userToDelete.name}</strong>.</p>
+            <p style={{color:'var(--danger)',fontSize:12,marginBottom:24}}>This will also delete all their messages. Cannot be undone.</p>
             <div className="gap-2" style={{justifyContent:'center'}}>
-              <button className="btn btn-danger" onClick={()=>deleteUser(confirmDelete)}>Yes, delete permanently</button>
+              <button className="btn btn-danger" onClick={()=>deleteUser(confirmDelete)}>Yes, delete</button>
               <button className="btn btn-ghost" onClick={()=>setConfirmDelete(null)}>Cancel</button>
             </div>
           </div>
@@ -628,18 +620,18 @@ function AdminUsersPage({users,setUsers,currentUser,messages,setMessages}){
               <tbody>
                 {filtered.map(u=>(
                   <tr key={u.id}>
-                    <td><div style={{display:'flex',alignItems:'center',gap:10}}><Avatar name={u.name} size={32}/><span style={{fontWeight:500}}>{u.name}</span></div></td>
+                    <td><div style={{display:'flex',alignItems:'center',gap:10}}><Avatar name={u.name} size={32}/><span style={{fontWeight:700}}>{u.name}</span></div></td>
                     <td style={{color:'var(--text-muted)'}}>{u.email}</td>
                     <td style={{color:'var(--text-muted)',fontSize:12}}>{u.joined}</td>
                     <td><span className={`badge badge-${u.status}`}>{u.status}</span></td>
                     <td><span className={`badge ${u.role==='admin'?'badge-admin':'badge-anon'}`}>{u.role}</span></td>
                     <td>
-                      <div className="gap-2" style={{flexWrap:'wrap'}}>
+                      <div className="gap-2">
                         {u.status==='pending'&&<><button className="btn btn-success btn-sm" onClick={()=>approve(u.id)}>✓ Approve</button><button className="btn btn-danger btn-sm" onClick={()=>deny(u.id)}>✗ Deny</button></>}
                         {u.status==='denied'&&<button className="btn btn-ghost btn-sm" onClick={()=>approve(u.id)}>Approve</button>}
                         {u.status==='approved'&&u.role!=='admin'&&u.id!==currentUser.id&&<button className="btn btn-accent btn-sm" onClick={()=>makeAdmin(u.id)}>Make Admin</button>}
                         {u.role==='admin'&&u.id!==currentUser.id&&<button className="btn btn-ghost btn-sm" onClick={()=>removeAdmin(u.id)}>Remove Admin</button>}
-                        {u.id!==currentUser.id&&<button className="btn btn-danger btn-sm" style={{marginLeft:'auto'}} onClick={()=>setConfirmDelete(u.id)}>🗑 Delete</button>}
+                        {u.id!==currentUser.id&&<button className="btn btn-danger btn-sm" onClick={()=>setConfirmDelete(u.id)}>🗑 Delete</button>}
                       </div>
                     </td>
                   </tr>
@@ -653,33 +645,33 @@ function AdminUsersPage({users,setUsers,currentUser,messages,setMessages}){
   );
 }
 
-function AdminMessagesPage({messages,users,setMessages}){
+function AdminMessagesPage({messages,setMessages}){
   const[filter,setFilter]=useState('');
   const filtered=messages.filter(m=>{
     const s=filter.toLowerCase();
-    return !s||m.fromName.toLowerCase().includes(s)||m.toName.toLowerCase().includes(s)||m.content.toLowerCase().includes(s);
+    return !s||m.fromName.toLowerCase().includes(s)||m.toName.toLowerCase().includes(s)||(m.content||'').toLowerCase().includes(s);
   }).slice().reverse();
-
   return(
     <div>
-      <div className="alert alert-info" style={{marginBottom:16}}>👁️ As admin, you can see all messages including anonymous senders.</div>
+      <div className="alert alert-info">👁️ As admin, you can see all messages including anonymous senders.</div>
       <div style={{marginBottom:16}}><input value={filter} onChange={e=>setFilter(e.target.value)} placeholder="Search by name or content..."/></div>
       {filtered.length===0?<div className="empty"><div className="empty-icon">📋</div><p>No messages found</p></div>:
         filtered.map(m=>(
-          <div key={m.id} className="msg-card" style={{borderLeft:m.anonymous?'3px solid var(--accent)':'3px solid var(--green)'}}>
+          <div key={m.id} className="msg-card" style={{borderLeft:`3px solid ${m.anonymous?'var(--accent)':'var(--green)'}`}}>
             <div className="msg-meta">
               <Avatar name={m.fromName} size={22}/>
-              <span className="msg-from" style={{fontWeight:600}}>{m.fromName}</span>
+              <span className="msg-from" style={{fontWeight:700}}>{m.fromName}</span>
               {m.anonymous&&<span className="badge badge-anon" style={{fontSize:10}}>sent anonymously</span>}
               <span style={{fontSize:12,color:'var(--text-muted)'}}>→</span>
               <Avatar name={m.toName} size={22}/>
-              <span className="msg-to" style={{fontWeight:600}}>{m.toName}</span>
+              <span style={{fontSize:12,fontWeight:700}}>{m.toName}</span>
               <span className={`msg-type-badge msg-type-${m.type}`}>{m.type}</span>
               <span className="msg-time">{m.timestamp}</span>
             </div>
             <div className="msg-body">
               {m.type==='quote'?<em>"{m.content}" {m.author&&`— ${m.author}`}</em>:m.content}
-              {m.mediaUrl&&<div style={{marginTop:6}}><span style={{color:'var(--text-muted)',fontSize:12}}>Media: </span><a href={m.mediaUrl} target="_blank" rel="noopener noreferrer" style={{color:'var(--accent)',fontSize:12}}>{m.mediaUrl}</a></div>}
+              {m.mediaData&&<div style={{marginTop:8}}><img src={m.mediaData} alt="media" style={{maxWidth:'100%',maxHeight:160,borderRadius:10,objectFit:'contain'}}/></div>}
+              {m.mediaUrl&&!m.mediaData&&<div style={{marginTop:6}}><a href={m.mediaUrl} target="_blank" rel="noopener noreferrer" style={{color:'var(--accent)',fontSize:12}}>🔗 {m.mediaUrl}</a></div>}
             </div>
           </div>
         ))
@@ -692,19 +684,10 @@ function AdminQuotesPage({quotes,setQuotes}){
   const[form,setForm]=useState({text:'',author:''});
   const[editing,setEditing]=useState(null);
   const[err,setErr]=useState('');
-
-  function addQuote(){
-    if(!form.text||!form.author){setErr('Both fields required.');return;}
-    setQuotes(prev=>[...prev,{id:Date.now(),text:form.text,author:form.author,active:true}]);
-    setForm({text:'',author:''});setErr('');
-  }
+  function addQuote(){if(!form.text||!form.author){setErr('Both fields required.');return;}setQuotes(prev=>[...prev,{id:Date.now(),text:form.text,author:form.author,active:true}]);setForm({text:'',author:''});setErr('');}
   function toggleActive(id){setQuotes(prev=>prev.map(q=>q.id===id?{...q,active:!q.active}:q));}
   function deleteQuote(id){setQuotes(prev=>prev.filter(q=>q.id!==id));}
-  function saveEdit(){
-    setQuotes(prev=>prev.map(q=>q.id===editing.id?{...q,...editing}:q));
-    setEditing(null);
-  }
-
+  function saveEdit(){setQuotes(prev=>prev.map(q=>q.id===editing.id?{...q,...editing}:q));setEditing(null);}
   return(
     <div>
       <div className="grid-2" style={{marginBottom:24}}>
@@ -718,10 +701,9 @@ function AdminQuotesPage({quotes,setQuotes}){
         <div className="card">
           <div className="card-title" style={{marginBottom:14}}>Stats</div>
           <div className="stat-card" style={{marginBottom:10}}><div className="stat-value">{quotes.length}</div><div className="stat-label">Total quotes</div></div>
-          <div className="stat-card"><div className="stat-value">{quotes.filter(q=>q.active).length}</div><div className="stat-label">Active / visible to users</div></div>
+          <div className="stat-card"><div className="stat-value">{quotes.filter(q=>q.active).length}</div><div className="stat-label">Active / visible</div></div>
         </div>
       </div>
-
       {editing&&(
         <div className="card" style={{marginBottom:16,borderColor:'var(--primary)',background:'var(--primary-light)'}}>
           <div className="card-title" style={{marginBottom:12}}>Editing Quote</div>
@@ -730,7 +712,6 @@ function AdminQuotesPage({quotes,setQuotes}){
           <div className="gap-2"><button className="btn btn-primary" onClick={saveEdit}>Save Changes</button><button className="btn btn-ghost" onClick={()=>setEditing(null)}>Cancel</button></div>
         </div>
       )}
-
       <div className="card">
         <div className="table-wrap">
           <table>
@@ -741,13 +722,7 @@ function AdminQuotesPage({quotes,setQuotes}){
                   <td style={{maxWidth:300,fontStyle:'italic',fontSize:13}}>"{q.text.slice(0,80)}{q.text.length>80?'...':''}"</td>
                   <td style={{color:'var(--text-muted)',fontSize:13}}>{q.author}</td>
                   <td><span className={`badge ${q.active?'badge-approved':'badge-denied'}`}>{q.active?'Active':'Hidden'}</span></td>
-                  <td>
-                    <div className="gap-2">
-                      <button className="btn btn-ghost btn-sm" onClick={()=>setEditing({...q})}>Edit</button>
-                      <button className="btn btn-ghost btn-sm" onClick={()=>toggleActive(q.id)}>{q.active?'Hide':'Show'}</button>
-                      <button className="btn btn-danger btn-sm" onClick={()=>deleteQuote(q.id)}>Delete</button>
-                    </div>
-                  </td>
+                  <td><div className="gap-2"><button className="btn btn-ghost btn-sm" onClick={()=>setEditing({...q})}>Edit</button><button className="btn btn-ghost btn-sm" onClick={()=>toggleActive(q.id)}>{q.active?'Hide':'Show'}</button><button className="btn btn-danger btn-sm" onClick={()=>deleteQuote(q.id)}>Delete</button></div></td>
                 </tr>
               ))}
             </tbody>
